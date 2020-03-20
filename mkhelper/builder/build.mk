@@ -7,7 +7,7 @@ export TGTMACRO			:=	@config
 export TGTMACRO_BUILD	:=	$(BUILDIR)/config
 
 # Norm Libraries
-export TGTSHARED_PLTLIB	:=	$(BUILDIR)/*.a
+export TGTSHARED_PLTLIB	:=	$(BUILDIR)
 
 export BUILDTYPE_NOLINK		:=	0
 export BUILDTYPE_PLTLIB		:=	1

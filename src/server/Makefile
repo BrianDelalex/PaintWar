@@ -2,9 +2,7 @@
 #  Makefile for client source redirections
  #
 
-CLIENT_SOURCE_DIR	=	scheduler	\
-						graphic		\
-						network		\
+SERVER_SOURCE_DIR	=	
 
 .PHONY: all
 
@@ -12,9 +10,7 @@ CLIENT_SOURCE_DIR	=	scheduler	\
 all:	subbuild	$(.EXPANSION)	hostbuilder
 
 subbuild:
-	@make -C scheduler --no-print-directory
-	@make -C graphic --no-print-directory
-	@make -C network --no-print-directory
+	@make -C XXX --no-print-directory
 
 .EXPANSION:
 BUILDHEADER	=	$(BINARY)

@@ -20,14 +20,15 @@ export INCLUDE_DIR =	-I $(realpath $(ROOT_INC_DIR))
 export PROJECT			:=	PaintWar
 # export VERSION			:=	0.1.0
 export BIN_EXTENSION	:=	bin
-export SERVER_BIN		:=	$(PROJECT)-server.$(BIN_EXTENSION)
-export CLIENT_BIN		:=	$(PROJECT)-client.$(BIN_EXTENSION)
+export BINARY			:=	$(PROJECT)-$(TARGET).$(BIN_EXTENSION)
 
 # Norm extension
 export EXTENSION_SRC	:=	.cpp
 export EXTENSION_OBJ	:=	.o
+export EXTENSION_LIB	:=	.a
 
-export LDFLAGS			=	-n		\
+export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)	\
+							-L	$(TGTSHARED_PLTLIB)/*.a
 
 export LDFLAGS_DEBUG	=	--trace					\
 							--cref					\
@@ -43,10 +44,8 @@ export CXXFLAGS	=	$(INCLUDE_DIR)						\
 					-MF		$(BUILDEP)					\
 					-Wall								\
 					-Wextra				 				\
-					-Wnested-externs					\
 					-Winline							\
 					-Wpragmas							\
-					-std=gnu11							\
 					-Wuninitialized						\
 					-Wno-missing-braces					\
 					-Wcast-align						\
@@ -59,13 +58,12 @@ export CXXFLAGS	=	$(INCLUDE_DIR)						\
 					-Wshadow				 			\
 					-Wuninitialized				 		\
 					-Wmissing-declarations				\
-					-Wmissing-prototypes				\
-					-Wstrict-prototypes					\
 					-Wpointer-arith						\
+					-imacros $(TGTMACRO)				\
 					# -Werror
 
 # Compile-time Macro
-CFLAGS		+=	'-D PROJECT="$(PROJECT)"'			\
+CXXFLAGS	+=	'-D PROJECT="$(PROJECT)"'			\
 
 # Debug mode
 export 	CFLAGSDEBUG	= 	-D DEBUG \
@@ -73,7 +71,7 @@ export 	CFLAGSDEBUG	= 	-D DEBUG \
 
 debug ?= 0
 ifeq ($(debug), 1)
-    CFLAGS 	+= $(CFLAGSDEBUG)
+    CXXFLAGS 	+= $(CFLAGSDEBUG)
 	LDFLAGS	+= $(LDFLAGS_DEBUG)
 endif
 

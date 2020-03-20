@@ -1,4 +1,6 @@
+#include <iostream>
+
 int main(void)
 {
-    std::cout << "Its working\n";
+    std::cout << "Its building " << IMAMACRO << "\n";
 }
