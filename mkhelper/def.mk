@@ -27,8 +27,14 @@ export EXTENSION_SRC	:=	.cpp
 export EXTENSION_OBJ	:=	.o
 export EXTENSION_LIB	:=	.a
 
+# Library Flags
+LIBFLAGS	=	-lsfml-system	\
+				-lsfml-window	\
+				-lsfml-network
+
 export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)	\
-							-L	$(TGTSHARED_PLTLIB)/*.a
+							-L	$(TGTSHARED_PLTLIB)/*.a		\
+							$(LIBFLAGS)
 
 export LDFLAGS_DEBUG	=	--trace					\
 							--cref					\
@@ -61,6 +67,9 @@ export CXXFLAGS	=	$(INCLUDE_DIR)						\
 					-Wpointer-arith						\
 					-imacros $(TGTMACRO)				\
 					# -Werror
+
+CXXFLAGS += $(LIBFLAGS)
+
 
 # Compile-time Macro
 CXXFLAGS	+=	'-D PROJECT="$(PROJECT)"'			\
