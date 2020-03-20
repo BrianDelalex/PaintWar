@@ -14,7 +14,7 @@ export ROOT_SRC_DIR	:=	src
 export ROOT_INC_DIR	:=	inc
 
 # We Will provide the full path each time
-export INCLUDE_DIR =	-I $(realpath $(ROOT_INC_DIR))
+export INCLUDE_DIR	=	-I $(realpath $(ROOT_INC_DIR))
 
 # Binary definition
 export PROJECT			:=	PaintWar
