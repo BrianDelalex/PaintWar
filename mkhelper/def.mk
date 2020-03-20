@@ -4,7 +4,6 @@
 
 # Built for link
 export BUILDIR	:=	$(realpath .)/build
-export KBUILD	:=	$(BUILDIR)/kbuild
 
 export MKHELPER_DIR	:=	$(shell realpath .)/mkhelper
 
@@ -13,10 +12,6 @@ export PROJECT_PATH	:=	$(shell realpath .)
 # Root diretcories
 export ROOT_SRC_DIR	:=	src
 export ROOT_INC_DIR	:=	inc
-
-# Sub Source Directories
-export TARGET_DIR	:=	target
-export ARCH_DIR		:=	arch
 
 # We Will provide the full path each time
 export INCLUDE_DIR =	-I $(realpath $(ROOT_INC_DIR))
@@ -43,7 +38,7 @@ export RM	:=	rm -rf
 export BUILDEP	:=	dep.d
 
 # Cleaner as possible
-export CCFLAGS	=	$(INCLUDE_DIR)						\
+export CXXFLAGS	=	$(INCLUDE_DIR)						\
 					-MMD								\
 					-MF		$(BUILDEP)					\
 					-Wall								\
@@ -51,7 +46,6 @@ export CCFLAGS	=	$(INCLUDE_DIR)						\
 					-Wnested-externs					\
 					-Winline							\
 					-Wpragmas							\
-					-ffreestanding 						\
 					-std=gnu11							\
 					-Wuninitialized						\
 					-Wno-missing-braces					\
@@ -68,7 +62,6 @@ export CCFLAGS	=	$(INCLUDE_DIR)						\
 					-Wmissing-prototypes				\
 					-Wstrict-prototypes					\
 					-Wpointer-arith						\
-					-O2 								\
 					# -Werror
 
 # Compile-time Macro
