@@ -2,15 +2,15 @@
 
 PaintWar is A Epitech JAM project.
 
-The purpose of this project is to create a video game. (explain)
+The purpose of this project is to create a video game. (explain later)
 
 ## INSTALL
 
 There is no toolchain for cross-compiling. The project is using your host compiler, libraries and tools.
 
-Dep list:
+Dependencies list:
   * `g++` [dowload](https://ftp.gnu.org/gnu/gcc)
-  * `make` [download](https://ftp.gnu.org/gnu/make/)
+  * `make` [download](https://ftp.gnu.org/gnu/make)
   * `sfml` [clone](https://github.com/SFML/SFML)
 
 ## BUILD
