@@ -32,8 +32,8 @@ LIBFLAGS	=	-lsfml-system	\
 				-lsfml-window	\
 				-lsfml-network
 
-export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)	\
-							-L	$(TGTSHARED_PLTLIB)/*.a		\
+export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)							\
+							-L	$(TGTSHARED_PLTLIB)/*$(EXTENSION_LIB)		\
 							$(LIBFLAGS)
 
 export LDFLAGS_DEBUG	=	--trace					\

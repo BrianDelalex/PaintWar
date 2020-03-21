@@ -15,6 +15,7 @@ subbuild:
 	@make -C scheduler --no-print-directory
 	@make -C graphic --no-print-directory
 	@make -C network --no-print-directory
+	@mkdir -p $(TGTSHARED_PLTLIB)
 
 .EXPANSION:
 BUILDHEADER	=	$(BINARY)
