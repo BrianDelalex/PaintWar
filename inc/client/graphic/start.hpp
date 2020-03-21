@@ -53,7 +53,26 @@ class Connexion{
     protected:
 };
 
+class Options {
+    public:
+        Options();
+        ~Options();
+        sf::Sprite sprite;
+        sf::Texture texture;
+        sf::Text options;
+        sf::Text volume;
+        sf::Text back;
+        sf::Text volume_25;
+        sf::Text volume_50;
+        sf::Text volume_75;
+        sf::Text volume_100;
+        sf::Font font;
+    private:
+    protected:
+};
+
 int start(int, char **);
 int connexion_page(void);
+int options(void);
 
 #endif /* !START_HPP_ */

@@ -53,8 +53,10 @@ int start(int a, char **v)
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                if ((localPosition.x >= 24 && localPosition.x <= 718) && (localPosition.y >= 657 && localPosition.y <= 796))
+                if ((localPosition.x >= 24 && localPosition.x <= 718) && (localPosition.y >= 657 && localPosition.y <= 796)) {
                     printf("options");
+                    options();
+                }
                     // OPTIONS music extc
                 if ((localPosition.y <= 796 && localPosition.y >= 657) && (localPosition.x <= 1145 && localPosition.x >= 730)) {
                     printf("play\n");
