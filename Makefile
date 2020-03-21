@@ -19,8 +19,8 @@ checkup:
 
 # Lauch the build, clean & exit if failed
 build:
-	@make -C $(PROJECT_PATH)/$(ROOT_SRC_DIR)/$(TARGET) --no-print-directory	
-		#|| \
+	@make -C $(PROJECT_PATH)/$(ROOT_SRC_DIR)/$(TARGET) --no-print-directory	\
+		|| \
 	(echo -e "[$(BoldRed)ABORT$(Blank)] Build Failed" && make fclean --no-print-directory && exit 0)
 
 # Clean the relocatable objects & kbuild

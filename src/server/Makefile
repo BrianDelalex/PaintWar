@@ -2,15 +2,14 @@
 #  Makefile for client source redirections
  #
 
-SERVER_SOURCE_DIR	=	
+SERVER_SOURCE_DIR	=	core
 
 .PHONY: all
-
 
 all:	subbuild	$(.EXPANSION)	hostbuilder
 
 subbuild:
-	@make -C XXX --no-print-directory
+	@make -C core --no-print-directory
 
 .EXPANSION:
 BUILDHEADER	=	$(BINARY)

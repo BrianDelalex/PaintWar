@@ -8,7 +8,6 @@ CLIENT_SOURCE_DIR	=	scheduler	\
 
 .PHONY: all
 
-
 all:	subbuild	$(.EXPANSION)	hostbuilder
 
 subbuild:
