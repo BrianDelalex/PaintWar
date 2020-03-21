@@ -20,9 +20,27 @@ class Menu {
     public:
         Menu();
         ~Menu();
+        int main();
         sf::Sprite sprite;
         sf::Texture texture;
         sf::Mouse mouse;
+
+    private:
+    protected:
+};
+
+class Connexion{
+    public:
+        Connexion();
+        ~Connexion();
+        int connexion_page();
+        sf::Sprite sprite;
+        sf::Texture texture;
+        sf::String playerInput;
+        sf::Text playerText;
+        sf::Text text;
+        sf::Font font;
+        std::string _ip;
     private:
     protected:
 };

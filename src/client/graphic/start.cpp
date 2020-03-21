@@ -6,11 +6,12 @@
 */
 
 #include "start.hpp"
+#include "connexion_page.cpp"
 
 Menu::Menu()
 {
     sf::IntRect rect (0, 0, 1920, 1080);
-    this->texture.loadFromFile("menu.png");
+    this->texture.loadFromFile("Assets/menu.png");
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(rect);
 }
@@ -37,8 +38,10 @@ int main()
                 if ((localPosition.x >= 24 && localPosition.x <= 718) && (localPosition.y >= 657 && localPosition.y <= 796))
                     printf("options");
                     // OPTIONS music extc
-                if ((localPosition.y <= 724 && localPosition.y >= 648) && (localPosition.x <= 1141 && localPosition.x >= 804))
+                if ((localPosition.y <= 720 && localPosition.y >= 644) && (localPosition.x <= 1145 && localPosition.x >= 818)) {
                     printf("play\n");
+                    connexion_page();
+                }
                     // PLAY jeu vidéo affichage map
                 if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801))
                     printf("EXIT\n");
