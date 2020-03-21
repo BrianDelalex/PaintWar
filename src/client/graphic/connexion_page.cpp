@@ -19,13 +19,11 @@ Connexion::~Connexion()
 {
 }
 
-int connexion_page()
+int load_text()
 {
-    /*Case a tapper port et IP*/
     Connexion connect;
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
-
-    if (!connect.font.loadFromFile("Assets/Graffiti.ttf")) {
+    printf("%s\n", "putain");
+    if (!connect.font.loadFromFile("Graffiti.ttf")) {
         printf("pas marché l'écriture");
         return (84);
     }
@@ -34,15 +32,36 @@ int connexion_page()
     connect.playerText.setPosition(60,300);
     connect.text.setFont(connect.font);
     connect.text.setString("C'est parti pour la plus grand de toutes les batailles de peinture !!");
+    printf("%s\n", "censé avoir");
+    return (0);
+}
+
+// void print_cpu(Connect connect, sf::RenderWindow *window)
+// {
+
+// }
+int connexion_page()
+{
+    /*Case a tapper port et IP*/
+    Connexion connect;
+
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
+
+    if (!connect.font.loadFromFile("Graffiti.ttf")) {
+        printf("pas marché l'écriture");
+        return (84);
+    }
+
+    connect.font.loadFromFile("Graffiti.ttf");
+    connect.playerText.setFont(connect.font);
+    connect.playerText.setPosition(60,300);
+    connect.text.setFont(connect.font);
+    connect.text.setString("C'est parti pour la plus grand de toutes les batailles!!");
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            // if (event.type == sf::Event::TextEntered) {
-            //     // if (event.text.unicode < 128)
-            //         connect._ip = event.text.unicode;
-            //         }
             if (event.type == sf::Event::TextEntered)
             {
                 if (event.text.unicode < 128) {
@@ -59,6 +78,7 @@ int connexion_page()
         window.draw(connect.sprite);
         window.draw(connect.text);
         window.draw(connect.playerText);
+
         window.display();
     }
     return (0);

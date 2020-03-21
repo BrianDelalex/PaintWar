@@ -21,9 +21,17 @@ Menu::~Menu()
 
 }
 
-int main()
+int start(int argc, char **argv)
 {
     Menu menu;
+
+    argv[1] == menu._username;
+    argv[2] == menu._ip;
+    argv[3] += menu._port;
+    printf("%s\n", argv[1]);
+    printf("%s\n", argv[2]);
+    // printf("%s\n", argv[3]);
+
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "PaintWar");
 
     while (window.isOpen())
