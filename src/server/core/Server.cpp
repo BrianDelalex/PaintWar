@@ -62,7 +62,43 @@ void Server::start_game()
     {
         this->selector.add((*this->clients[i]));
     }
+    send_all("START ");
+    init();
     std::cout << "Starting game" << std::endl;
+}
+
+void Server::init()
+{
+    for (uint j = 0; j < players.size(); j++)
+    {
+        if (j % 2 == 0) 
+        {
+            players[j].team = BLUE;
+            players[j].pos.y = 22 + j;
+            players[j].pos.x = 1;
+        }
+        else
+        {
+            players[j].team = RED;
+            players[j].pos.y = 22 + j;
+            players[j].pos.x = 79;
+        }
+
+    }
+    for (uint j = 0; j < players.size(); j++)
+    {
+            char c;
+            if (players[j].team == BLUE)
+                c = 'b';
+            else
+                c = 'r';
+            std::cout << std::string("PLAYER " + std::to_string(players[j].pos.x) + " " + std::to_string(players[j].pos.y) + " " + c) << std::endl;
+            send_all(std::string("PLAYER " + std::to_string(players[j].pos.x) + " " + std::to_string(players[j].pos.y) + " " + c));
+    }
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    send_all("INITEND ");
+    std::cout << "INITEND" << std::endl;
+    process();
 }
 
 void Server::process()
@@ -134,4 +170,11 @@ void Server::connection_info(const std::string &msg)
         std::cout << "[SERVER]: " << args << " connected.\n";
     }
     
+}
+
+void Server::send_all(const std::string &msg)
+{
+    for (uint i = 0; i < this->clients.size(); i++)
+        if ((*clients[i]).send(msg.c_str(), msg.length()) != sf::Socket::Done)
+            throw ServerError("Error send_all", "ServerError");
 }

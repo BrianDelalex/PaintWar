@@ -20,8 +20,10 @@ class Client
 public:
     Client();
     ~Client();
-    void connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name, game_t *game);
+    void connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name, game_t game);
     void send(const std::string &msg);
+    std::string wait_start();
+    void init();
     void received();
     void interpreter(const std::string &msg);
     void setCallback(std::function<void(game_t)> cb);
@@ -31,7 +33,7 @@ private:
     bool _is_connected;
     std::function<void(game_t)> cb;
     int nb_player;
-    game_t *game;
+    game_t game;
 };
 
 #endif

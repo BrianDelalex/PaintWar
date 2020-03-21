@@ -11,6 +11,7 @@
 #include <SFML/Network.hpp>
 #include "server/ServerError.hpp"
 #include "server/ServerPlayer.hpp"
+#include <thread>
 
 class Server
 {
@@ -23,6 +24,8 @@ public:
     void interpreter(const std::string &msg, uint i);
     void connection_info(const std::string &msg);
     void start_game();
+    void init();
+    void send_all(const std::string &msg);
     void new_player(const std::string &name, uint idx);
     void player_move(const std::string &args, uint idx);
 private:
