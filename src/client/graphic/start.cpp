@@ -23,29 +23,25 @@ Menu::~Menu()
 
 int error_management(int a, char **v)
 {
-    if (a > 1 && v[1][0] == '-') {
+    if (a == 1 || a == 2 || a == 3) {
         std::cout << "Pour participer à ce jeu c'est très simple." << std::endl;
         std::cout << "Il vous suffit de mettre dans cette ordre:" << std::endl;
         std::cout << "Votre nom de joueur." << std::endl;
         std::cout << "Votre adresse Ip." << std::endl;
         std::cout << "Votre port" << std::endl;
-        return (0);
-    }
-    if (a == 2)
         return (84);
+    }
+    if (a == 4)
+        start(v);
     return (0);
 }
 
-int start(int a, char **v)
+int start(char **v)
 {
     Menu menu;
-
-    error_management(a, v);
-
     menu._username = v[1];
     menu._ip = v[2];
     menu._port = std::stoi(v[3]);
-    std::cout << menu._username << "  " << menu._ip << " "<< menu._port << std::endl;
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "PaintWar");
 
@@ -86,6 +82,4 @@ int start(int a, char **v)
 /*
     -> faire la page option avec musique sound extc
     faire peut etre page après  play pour le choix des caratères
-    ensuite
-    choisir la carte er c'est partis
 */
