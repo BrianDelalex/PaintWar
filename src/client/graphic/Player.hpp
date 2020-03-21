@@ -3,15 +3,16 @@
 
 #include "Gun.hpp"
 
-
-class Player 
+class Player
 {
 public:
-    enum Direction {UP, DOWN, LEFT, RIGHT};
     Player(std::string color);
     ~Player();
     std::vector<int> getPosition() const;
     void move(Direction);
+    std::string getColor() const;
+    void shoot();
+    void reload();
 
 private:
     std::string _color;
@@ -20,18 +21,5 @@ private:
     Gun *_gun;
     Direction _dir;
 };
-
-
-Player::Player(std::string color) :
-    _color(color),
-    _dir(color == "blue" ? Direction::LEFT : Direction::RIGHT)
-{
-    _gun = new Gun;
-}
-
-Player::~Player()
-{
-}
-
 
 #endif
