@@ -43,6 +43,7 @@ int load_text()
 int connexion_page()
 {
     /*Case a tapper port et IP*/
+    Menu menu;
     Connexion connect;
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
@@ -51,7 +52,7 @@ int connexion_page()
         printf("pas marché l'écriture");
         return (84);
     }
-
+    printf("%s\n", menu._username);
     connect.font.loadFromFile("Graffiti.ttf");
     connect.playerText.setFont(connect.font);
     connect.playerText.setPosition(60,300);
@@ -85,6 +86,5 @@ int connexion_page()
 }
 /*
     TODO-LIST:
-        1- Récupérer et stocker les valeurs du port et ip
-        2- Belle affichage avec input avec case pour écrire pour le port et l'input extc
+        afficher les usernames extc
 */

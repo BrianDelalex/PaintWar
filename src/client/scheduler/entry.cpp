@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main(void)
+int main(int argc, char **argv)
 {
-    std::cout << "Its building " << IMAMACRO << "\n";
+    start(argc, argv);
 }

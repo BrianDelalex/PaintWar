@@ -21,16 +21,24 @@ Menu::~Menu()
 
 }
 
-int start(int argc, char **argv)
+int main(int argc, char **argv)
 {
     Menu menu;
 
-    argv[1] == menu._username;
-    argv[2] == menu._ip;
-    argv[3] += menu._port;
-    printf("%s\n", argv[1]);
-    printf("%s\n", argv[2]);
-    // printf("%s\n", argv[3]);
+    if (argc > 1 && argv[1] == "-h") {
+        std::cout << "Pour participer à ce jeu c'est très simple." << std::endl;
+        std::cout << "Il vous suffit de mettre dans cette ordre:" << std::endl;
+        std::cout << "Votre nom de joueur." << std::endl;
+        std::cout << "Votre adresse Ip." << std::endl;
+        std::cout << "Votre port" << std::endl;
+        return (0);
+    }
+
+    menu._username = argv[1];
+    menu._ip = argv[2];
+    menu._port = std::stoi(argv[3]);
+    std::cout << menu._username << "  " << menu._ip << " "<< menu._port << std::endl;
+
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "PaintWar");
 
