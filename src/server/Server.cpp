@@ -92,6 +92,6 @@ void Server::interpreter(const std::string &msg, uint i)
     }
     if (cmd == "MOVE")
     {
-
+        player_move(args, i);
     }
 }
