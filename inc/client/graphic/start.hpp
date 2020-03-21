@@ -20,7 +20,6 @@ class Menu {
     public:
         Menu();
         ~Menu();
-        int start(int argc, char **argv);
         sf::Sprite sprite;
         sf::Texture texture;
         sf::Mouse mouse;
@@ -31,6 +30,8 @@ class Menu {
     private:
     protected:
 };
+
+int start(int argc, char **argv);
 
 class Connexion{
     public:
@@ -50,4 +51,8 @@ class Connexion{
     private:
     protected:
 };
+
+int start(int, char **);
+int connexion_page(void);
+
 #endif /* !START_HPP_ */

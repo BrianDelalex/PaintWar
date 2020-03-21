@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "client/graphic/Player.hpp"
 
 
 Player::Player(std::string color) : _color(color),

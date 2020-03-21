@@ -1,7 +1,8 @@
-#include "Player.hpp"
-#include "Gun.hpp"
+#include "client/graphic/Player.hpp"
+#include "client/graphic/Gun.hpp"
 
-void Gun::fire(Direction d) {
+void Gun::fire(Direction d)
+{
     if (_bullets == 0)
         printf("can't fire");
     else {

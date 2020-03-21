@@ -5,7 +5,7 @@
 ** connexion_page
 */
 
-#include "start.hpp"
+#include "client/graphic/start.hpp"
 
 Connexion::Connexion()
 {
@@ -40,7 +40,7 @@ int load_text()
 // {
 
 // }
-int connexion_page()
+int Connexion::connexion_page(void)
 {
     /*Case a tapper port et IP*/
     Connexion connect;
