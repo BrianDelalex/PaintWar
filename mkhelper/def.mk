@@ -30,7 +30,8 @@ export EXTENSION_LIB	:=	.a
 # Library Flags
 LIBFLAGS	=	-lsfml-system	\
 				-lsfml-window	\
-				-lsfml-network
+				-lsfml-network	\
+				-lpthread
 
 export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)							\
 							-L	$(TGTSHARED_PLTLIB)/*$(EXTENSION_LIB)		\
