@@ -31,6 +31,9 @@ int error_management(int a, char **v)
         std::cout << "Votre port" << std::endl;
         return (0);
     }
+    if (a == 2)
+        return (84);
+    return (0);
 }
 
 int start(int a, char **v)
@@ -59,13 +62,16 @@ int start(int a, char **v)
                 }
                     // OPTIONS music extc
                 if ((localPosition.y <= 720 && localPosition.y >= 644) && (localPosition.x <= 1145 && localPosition.x >= 818)) {
-                    printf("play\n");
-                    connexion_page();
+                    // printf("play\n");
+                    // connexion_page();
+                    return (0);
                 }
                     // PLAY jeu vidéo affichage map
-                if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801))
+                if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801)) {
                     printf("EXIT\n");
                     window.close();
+                    return (1);
+                }
                     // EXIT
                 }
             if (event.type == sf::Event::Closed)
