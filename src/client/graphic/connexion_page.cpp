@@ -5,12 +5,12 @@
 ** connexion_page
 */
 
-#include "client/graphic/start.hpp"
+#include "../../../inc/client/graphic/start.hpp"
 
 Connexion::Connexion()
 {
     sf::IntRect rect (0, 0, 1920, 1080);
-    this->texture.loadFromFile("Assets/connexion.jpg");
+    this->texture.loadFromFile("src/client/graphic/picture/connexion.jpg");
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(rect);
 }
@@ -19,41 +19,35 @@ Connexion::~Connexion()
 {
 }
 
-int load_text()
-{
-    Connexion connect;
-    printf("%s\n", "putain");
-    if (!connect.font.loadFromFile("Graffiti.ttf")) {
-        printf("pas marché l'écriture");
-        return (84);
-    }
-    connect.font.loadFromFile("Graffiti.ttf");
-    connect.playerText.setFont(connect.font);
-    connect.playerText.setPosition(60,300);
-    connect.text.setFont(connect.font);
-    connect.text.setString("C'est parti pour la plus grand de toutes les batailles de peinture !!");
-    printf("%s\n", "censé avoir");
-    return (0);
-}
-
-// void print_cpu(Connect connect, sf::RenderWindow *window)
+// int load_text()
 // {
-
+//     Connexion connect;
+//     printf("%s\n", "putain");
+//     if (!connect.font.loadFromFile("Graffiti.ttf")) {
+//         printf("pas marché l'écriture");
+//         return (84);
+//     }
+//     connect.font.loadFromFile("Graffiti.ttf");
+//     connect.playerText.setFont(connect.font);
+//     connect.playerText.setPosition(60,300);
+//     connect.text.setFont(connect.font);
+//     connect.text.setString("C'est parti pour la plus grand de toutes les batailles de peinture !!");
+//     printf("%s\n", "censé avoir");
+//     return (0);
 // }
-int Connexion::connexion_page(void)
+
+int connexion_page(void)
 {
-    /*Case a tapper port et IP*/
     Menu menu;
     Connexion connect;
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
 
-    if (!connect.font.loadFromFile("Graffiti.ttf")) {
+    if (!connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf")) {
         printf("pas marché l'écriture");
         return (84);
     }
-    printf("%s\n", menu._username);
-    connect.font.loadFromFile("Graffiti.ttf");
+    connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf");
     connect.playerText.setFont(connect.font);
     connect.playerText.setPosition(60,300);
     connect.text.setFont(connect.font);
@@ -69,7 +63,6 @@ int Connexion::connexion_page(void)
                 connect.playerInput +=event.text.unicode;
                 connect.playerText.setString(connect.playerInput);
                 connect._ip += event.text.unicode;
-                printf("%s\n", connect._ip);
                 }
             }
             if (event.type == sf::Event::Closed)
