@@ -10,6 +10,7 @@
 
 #include <SFML/Network.hpp>
 #include "client/network/ClientError.hpp"
+#include "client/graphic/Game.hpp"
 #include <functional>
 
 
@@ -19,16 +20,18 @@ class Client
 public:
     Client();
     ~Client();
-    void connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name);
+    void connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name, game_t *game);
     void send(const std::string &msg);
     void received();
-    void setCallback(std::function<void(int)> cb);
+    void interpreter(const std::string &msg);
+    void setCallback(std::function<void(game_t)> cb);
     bool is_connected();
 private:
     sf::TcpSocket _socket;
     bool _is_connected;
-    std::function<void(int)> cb;
+    std::function<void(game_t)> cb;
     int nb_player;
+    game_t *game;
 };
 
 #endif

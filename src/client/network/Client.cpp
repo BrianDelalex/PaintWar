@@ -14,13 +14,14 @@ Client::Client()
 
 Client::~Client() {}
 
-void Client::connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name)
+void Client::connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name, game_t *game)
 {
     if (this->_socket.connect(adresse, port) != sf::Socket::Done)
     {
         throw ClientError(std::string("Unable to connect to" + adresse.toString()), "ClientError");
     }
     this->_is_connected = true;
+    this->game = game;
     if (this->_socket.send(std::string("NAME " + name).c_str(), 100) != sf::Socket::Done)
         throw ClientError("Error While sending name", "ClientError");
 }
@@ -43,13 +44,32 @@ void Client::received()
         {
             throw ClientError("Unable to receive message", "ClientError");
         }
-        this->nb_player++;
-        cb(nb_player);
-        std::cout << msg << std::endl;
+        interpreter(msg);
+        //cb(nb_player);
+        //std::cout << msg << std::endl;
     }
 }
 
-void Client::setCallback(std::function<void(int)> func)
+void Client::interpreter(const std::string &msg)
+{
+    std::string cmd = msg.substr(0, msg.find_first_of(" ", 0));
+    std::string args = msg.substr(msg.find_first_of(" ", 0) + 1, msg.length() - msg.find_first_of(" ", 0));
+
+    if (cmd == "MOVE") {
+        int first_space = args.find_first_of(" ", 0);
+        int last_space = args.find_last_of(" ");
+        uint id = std::stoi(args.substr(0, first_space));
+        uint x = std::stoi(args.substr(first_space + 1, args.length() - first_space - last_space));
+        uint y = std::stoi(args.substr(last_space, args.length() - last_space));
+        std::cout << "MOVE: " << "id: " << id   << " x: " << x << " y: " << y << std::endl; 
+    }
+    if (cmd == "INFO")
+    {
+        std::cout << args << std::endl;
+    }
+}
+
+void Client::setCallback(std::function<void(game_t)> func)
 {
     this->cb = func;
 }

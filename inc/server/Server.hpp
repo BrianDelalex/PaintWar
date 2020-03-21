@@ -18,8 +18,11 @@ public:
     Server();
     ~Server();
     void start(unsigned short port);
-    void waiting();
+    void connecting_player();
+    void process();
     void interpreter(const std::string &msg, uint i);
+    void connection_info(const std::string &msg);
+    void start_game();
     void new_player(const std::string &name, uint idx);
     void player_move(const std::string &args, uint idx);
 private:
@@ -27,6 +30,8 @@ private:
     std::vector<sf::TcpSocket *> clients;
     std::vector<Ply> players;
     sf::SocketSelector selector;
+    bool connectingPlayer;
+    bool serverOn;
 };
 
 #endif
