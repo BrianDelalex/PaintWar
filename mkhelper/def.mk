@@ -34,7 +34,7 @@ LIBFLAGS	=	-lsfml-system	\
 				-lpthread
 
 export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)							\
-							-L	$(TGTSHARED_PLTLIB)/*$(EXTENSION_LIB)		\
+							-L	$(TGTSHARED_PLTLIB)/*$(EXTENSION_LIB)				\
 							$(LIBFLAGS)
 
 export LDFLAGS_DEBUG	=	--trace					\
