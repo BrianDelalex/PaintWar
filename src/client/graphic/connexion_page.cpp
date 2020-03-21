@@ -19,23 +19,6 @@ Connexion::~Connexion()
 {
 }
 
-// int load_text()
-// {
-//     Connexion connect;
-//     printf("%s\n", "putain");
-//     if (!connect.font.loadFromFile("Graffiti.ttf")) {
-//         printf("pas marché l'écriture");
-//         return (84);
-//     }
-//     connect.font.loadFromFile("Graffiti.ttf");
-//     connect.playerText.setFont(connect.font);
-//     connect.playerText.setPosition(60,300);
-//     connect.text.setFont(connect.font);
-//     connect.text.setString("C'est parti pour la plus grand de toutes les batailles de peinture !!");
-//     printf("%s\n", "censé avoir");
-//     return (0);
-// }
-
 int connexion_page(void)
 {
     Menu menu;
