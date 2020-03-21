@@ -31,6 +31,7 @@ export EXTENSION_LIB	:=	.a
 LIBFLAGS	=	-lsfml-system	\
 				-lsfml-window	\
 				-lsfml-network	\
+				-lsfml-graphics	\
 				-lpthread
 
 export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)							\
