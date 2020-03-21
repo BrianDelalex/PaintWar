@@ -1,18 +1,22 @@
 #include "client/graphic/Player.hpp"
 
 
-Player::Player(std::string color) : _color(color),
-                                    _dir(color == "blue" ? Direction::LEFT : Direction::RIGHT)
+Player::Player()
 {
     _gun = new Gun;
 }
+
+void Player::setName(std::string name)
+{
+    _name = name;
+}
+
 
 Player::~Player()
 {
     if (_gun)
         delete _gun;
 }
-
 
 void Player::reload()
 {
@@ -22,14 +26,25 @@ void Player::reload()
         _gun->setAmmo(_gun->getAmmo() + 5);
 }
 
+std::string Player::getName() const
+{
+    return _name;
+}
+
 void Player::shoot()
 {
     _gun->fire(_dir);
+    //send ("FIRE _dir")
 }
 
-std::vector<int> Player::getPosition() const
+vec_s Player::getPosition() const
 {
-    return std::vector<int>(_x, _y);
+    return _pos;
+}
+
+void Player::setPosition(vec_s pos)
+{
+    _pos = pos;
 }
 
 void Player::move(Direction d)
@@ -37,16 +52,16 @@ void Player::move(Direction d)
     switch (d)
     {
     case Direction::DOWN:
-        _y++;
+        _pos.y++;
         break;
     case Direction::LEFT:
-        _x--;
+        _pos.x--;
         break;
     case Direction::RIGHT:
-        _x++;
+        _pos.x++;
         break;
     case Direction::UP:
-        _y--;
+        _pos.y--;
         break;
     default:
         break;
