@@ -5,7 +5,7 @@
 ** 
 */
 
-#include "Client.hpp"
+#include "client/network/Client.hpp"
 
 Client::Client()
 {

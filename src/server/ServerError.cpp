@@ -5,7 +5,7 @@
 ** 
 */
 
-#include "ServerError.hpp"
+#include "server/ServerError.hpp"
 
 ServerError::ServerError(const std::string &msg, const std::string &comp)
 {

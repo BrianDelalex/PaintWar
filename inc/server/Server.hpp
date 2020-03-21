@@ -9,8 +9,8 @@
 #define SERVER_HPP_
 
 #include <SFML/Network.hpp>
-#include "ServerError.hpp"
-#include "ServerPlayer.hpp"
+#include "server/ServerError.hpp"
+#include "server/ServerPlayer.hpp"
 
 class Server
 {

@@ -9,7 +9,7 @@
 #define CLIENT_HPP_
 
 #include <SFML/Network.hpp>
-#include "ClientError.hpp"
+#include "client/network/ClientError.hpp"
 #include <functional>
 
 

@@ -5,7 +5,7 @@
 ** 
 */
 
-#include "ClientError.hpp"
+#include "client/network/ClientError.hpp"
 
 ClientError::ClientError(const std::string &msg, const std::string &comp)
 {
