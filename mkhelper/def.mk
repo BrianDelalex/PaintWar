@@ -14,7 +14,7 @@ export ROOT_SRC_DIR	:=	src
 export ROOT_INC_DIR	:=	inc
 
 # We Will provide the full path each time
-export INCLUDE_DIR =	-I $(realpath $(ROOT_INC_DIR))
+export INCLUDE_DIR	=	-I $(realpath $(ROOT_INC_DIR))
 
 # Binary definition
 export PROJECT			:=	PaintWar
@@ -27,8 +27,16 @@ export EXTENSION_SRC	:=	.cpp
 export EXTENSION_OBJ	:=	.o
 export EXTENSION_LIB	:=	.a
 
-export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)	\
-							-L	$(TGTSHARED_PLTLIB)/*.a
+# Library Flags
+LIBFLAGS	=	-lsfml-system	\
+				-lsfml-window	\
+				-lsfml-network	\
+				-lsfml-graphics	\
+				-lpthread
+
+export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)							\
+							-L	$(TGTSHARED_PLTLIB)/*$(EXTENSION_LIB)				\
+							$(LIBFLAGS)
 
 export LDFLAGS_DEBUG	=	--trace					\
 							--cref					\
@@ -61,6 +69,9 @@ export CXXFLAGS	=	$(INCLUDE_DIR)						\
 					-Wpointer-arith						\
 					-imacros $(TGTMACRO)				\
 					# -Werror
+
+CXXFLAGS += $(LIBFLAGS)
+
 
 # Compile-time Macro
 CXXFLAGS	+=	'-D PROJECT="$(PROJECT)"'			\

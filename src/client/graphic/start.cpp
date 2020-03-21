@@ -5,8 +5,7 @@
 ** start
 */
 
-#include "start.hpp"
-#include "connexion_page.cpp"
+#include "client/graphic/start.hpp"
 
 Menu::Menu()
 {
@@ -21,11 +20,11 @@ Menu::~Menu()
 
 }
 
-int main(int argc, char **argv)
+int start(int a, char **v)
 {
     Menu menu;
 
-    if (argc > 1 && argv[1] == "-h") {
+    if (a > 1 && v[1] == "-h") {
         std::cout << "Pour participer à ce jeu c'est très simple." << std::endl;
         std::cout << "Il vous suffit de mettre dans cette ordre:" << std::endl;
         std::cout << "Votre nom de joueur." << std::endl;
@@ -34,43 +33,50 @@ int main(int argc, char **argv)
         return (0);
     }
 
-    menu._username = argv[1];
-    menu._ip = argv[2];
-    menu._port = std::stoi(argv[3]);
+    menu._username = v[1];
+    menu._ip = v[2];
+    menu._port = std::stoi(v[3]);
     std::cout << menu._username << "  " << menu._ip << " "<< menu._port << std::endl;
 
+    // argv[1] == menu._username;
+    // argv[2] == menu._ip;
+    // argv[3] += menu._port;
+    // printf("%s\n", argv[1]);
+    // printf("%s\n", argv[2]);
+    // // printf("%s\n", argv[3]);
 
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "PaintWar");
 
-    while (window.isOpen())
-    {
-        sf::Vector2i localPosition = sf::Mouse::getPosition(window);
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                printf("%d\n", localPosition.x);
-                printf("%d\n",localPosition.y);
-                if ((localPosition.x >= 24 && localPosition.x <= 718) && (localPosition.y >= 657 && localPosition.y <= 796))
-                    printf("options");
-                    // OPTIONS music extc
-                if ((localPosition.y <= 720 && localPosition.y >= 644) && (localPosition.x <= 1145 && localPosition.x >= 818)) {
-                    printf("play\n");
-                    connexion_page();
-                }
-                    // PLAY jeu vidéo affichage map
-                if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801))
-                    printf("EXIT\n");
-                    window.close();
-                    // EXIT
-                }
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-        window.clear();
-        window.draw(menu.sprite);
-        window.display();
-    }
+    // sf::RenderWindow window(sf::VideoMode(1920, 1080), "PaintWar");
+
+    // while (window.isOpen())
+    // {
+    //     sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+    //     sf::Event event;
+    //     while (window.pollEvent(event))
+    //     {
+    //         if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+    //             printf("%d\n", localPosition.x);
+    //             printf("%d\n",localPosition.y);
+    //             if ((localPosition.x >= 24 && localPosition.x <= 718) && (localPosition.y >= 657 && localPosition.y <= 796))
+    //                 printf("options");
+    //                 // OPTIONS music extc
+    //             if ((localPosition.y <= 720 && localPosition.y >= 644) && (localPosition.x <= 1145 && localPosition.x >= 818)) {
+    //                 printf("play\n");
+    //                 connexion_page();
+    //             }
+    //                 // PLAY jeu vidéo affichage map
+    //             if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801))
+    //                 printf("EXIT\n");
+    //                 window.close();
+    //                 // EXIT
+    //             }
+    //         if (event.type == sf::Event::Closed)
+    //             window.close();
+    //     }
+    //     window.clear();
+    //     window.draw(menu.sprite);
+    //     window.display();
+    // }
     return 0;
 }
 /*
