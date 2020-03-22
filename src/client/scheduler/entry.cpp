@@ -19,6 +19,7 @@ int main(int ac, char **av)
     client->setCallback(func);
     client->init();
     self->setClient(client);
+    std::cout << client->get_id() << std::endl;
     
     std::thread t(&Client::received, client);
     t.detach();

@@ -25,7 +25,9 @@ public:
     void send(const std::string &msg);
     std::string wait_start();
     void init();
+    uint get_id();
     void received();
+    void move(uint x, uint y);
     void interpreter(const std::string &msg);
     void setCallback(std::function<void(game_t)> cb);
     bool is_connected();

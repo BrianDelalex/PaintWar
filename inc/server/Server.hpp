@@ -26,6 +26,7 @@ public:
     void connection_info(const std::string &msg);
     void start_game();
     void init();
+    void send_id();
     void send_all(const std::string &msg);
     void new_player(const std::string &name, uint idx);
     void player_move(const std::string &args, uint idx);
