@@ -9,7 +9,7 @@
 
 Connexion::Connexion()
 {
-    sf::IntRect rect (0, 0, 1920, 1080);
+    sf::IntRect rect(0, 0, 1920, 1080);
     this->texture.loadFromFile("src/client/graphic/picture/connexion.jpg");
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(rect);
@@ -26,27 +26,51 @@ int connexion_page(void)
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
 
-    if (!connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf")) {
+    if (!connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf"))
+    {
         printf("pas marché l'écriture");
         return (84);
     }
     connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf");
     connect.playerText.setFont(connect.font);
-    connect.playerText.setPosition(60,300);
+    connect.playerText.setPosition(60, 300);
     connect.text.setFont(connect.font);
     connect.text.setString("C'est parti pour la plus grand de toutes les batailles!!");
+    game_t *k = new game_t;
+    Player *self = new Player;
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::TextEntered)
+            if (event.type == sf::Event::KeyPressed)
             {
-                if (event.text.unicode < 128) {
-                connect.playerInput +=event.text.unicode;
-                connect.playerText.setString(connect.playerInput);
-                connect._ip += event.text.unicode;
+                std::cout << event.key.code << std::endl;
+                if (event.key.code == sf::Keyboard::Up)
+                {
+                    std::cout << "UP" << std::endl;
                 }
+                if (event.key.code == sf::Keyboard::Down)
+                {
+                    std::cout << "DOWN" << std::endl;
+                }
+                if (event.key.code == sf::Keyboard::Left)
+                {
+                    std::cout << "LEFT" << std::endl;
+                }
+                if (event.key.code == sf::Keyboard::Right)
+                {
+                    std::cout << "RIGHT" << std::endl;
+                }
+
+                // if (event.text.unicode < 128) {
+                // connect.playerInput +=event.text.unicode;
+                // connect.playerText.setString(connect.playerInput);
+                // connect._ip += event.text.unicode;
+                // std::cout << connect._ip << std::endl;
+                // std::cout << std::string(connect.playerInput) << std::endl;
+                // std::cout << std::string(connect.playerText.getString()) << std::endl;
+                // }
             }
             if (event.type == sf::Event::Closed)
                 window.close();

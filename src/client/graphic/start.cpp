@@ -60,6 +60,7 @@ int start(int a, char **v)
                     // OPTIONS music extc
                 if ((localPosition.y <= 796 && localPosition.y >= 657) && (localPosition.x <= 1145 && localPosition.x >= 730)) {
                     printf("play\n");
+                    window.close();
                     connexion_page();
                 }
                     // PLAY jeu vidéo affichage map
