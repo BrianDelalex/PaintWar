@@ -3,5 +3,5 @@
 
 int main(int argc, char **argv)
 {
-    start(argc, argv);
+    error_management(argc, argv);
 }

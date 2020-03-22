@@ -32,8 +32,6 @@ class Menu {
     protected:
 };
 
-int start(int argc, char **argv);
-
 class Connexion{
     public:
         Connexion();
@@ -72,8 +70,9 @@ class Options {
     protected:
 };
 
-int start(int, char **);
+int start(char **);
 int connexion_page(void);
 int options(void);
+int error_management(int, char **);
 
 #endif /* !START_HPP_ */
