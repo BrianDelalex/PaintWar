@@ -8,14 +8,14 @@ typedef struct player_s
     vec_s pos;
     Team team;
     Direction direction;
-};
+} player_t;
 
 typedef struct str_s
 {
     std::string str;
     vec_s vec;
     long timepoint;
-};
+} str_t;
 
 typedef struct game_s
 {
@@ -25,6 +25,6 @@ typedef struct game_s
     std::vector<str_s> texts;
 } game_t;
 
-void initGame(void);
+
 
 #endif
