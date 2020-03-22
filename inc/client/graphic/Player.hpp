@@ -21,6 +21,7 @@ public:
     void reload();
     Direction getDir() const;
     void setClient(Client *client);
+    void assign(uint id, std::vector<player_s>);
 
 private:
     Client *_client;

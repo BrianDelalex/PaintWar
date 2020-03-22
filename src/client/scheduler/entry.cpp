@@ -19,8 +19,7 @@ int main(int ac, char **av)
     client->setCallback(func);
     client->init();
     self->setClient(client);
-    std::cout << client->get_id() << std::endl;
-    
+    self->assign(client->get_id(), game.players);
     std::thread t(&Client::received, client);
     t.detach();
     init();

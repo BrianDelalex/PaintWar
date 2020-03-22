@@ -12,6 +12,13 @@ Player::~Player()
         delete _gun;
 }
 
+void Player::assign(uint id, std::vector<player_s> arr)
+{
+    player_s self = arr.at(id);
+    _dir = self.team == Team::BLUE ? Direction::RIGHT : Direction::LEFT;
+    _pos.x = self.pos.x;
+    _pos.y = self.pos.y;
+}
 
 void Player::setName(std::string name)
 {
