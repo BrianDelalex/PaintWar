@@ -41,7 +41,7 @@ typedef struct str_s
 typedef struct game_s
 {
     std::vector<player_s> players;
-    player_s me;
+    uint me;
     std::vector<std::string> map;
     std::vector<str_s> texts;
 } game_t;

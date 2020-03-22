@@ -47,19 +47,27 @@ void draw_map(std::vector<std::string> *map)
     }
 }
 
-void draw_players(std::vector<player_s> *players)
+void draw_players(std::vector<player_s> *players, uint me)
 {
     sf::Color red = {255, 100, 100, 255};
     sf::Color blue = {100 , 100, 255, 255};
+    sf::Color yellow = {255, 255, 0, 255};
     sf::Vector2f size = {20, 20};
     sf::CircleShape circle(10, 30);
+    circle.setOutlineThickness(1.5);
     for (uint i = 0; i < players->size(); i++)
     {
         circle.setPosition((*players)[i].pos.x * TILE_SIZE + 2, (*players)[i].pos.y * TILE_SIZE + 2);
-        if ((*players)[i].team == BLUE)
+        if ((*players)[i].team == BLUE) {
             circle.setFillColor(blue);
-        else
+            circle.setOutlineColor(blue);
+        }
+        else {
             circle.setFillColor(red);
+            circle.setOutlineColor(red);
+        }
+        if (i == me)
+            circle.setOutlineColor(yellow);
         wd->draw(circle);
     }
 }
@@ -73,7 +81,7 @@ int draw_game(game_s game)
 {
     wd->clear();
     draw_map(&game.map);
-    draw_players(&game.players);
+    draw_players(&game.players, game.me);
     draw_texts(&game.texts);
     wd->display();
     sf::Event evt;

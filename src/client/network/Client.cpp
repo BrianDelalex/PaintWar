@@ -87,6 +87,8 @@ uint Client::get_id()
     if (this->_socket.receive(packet) != sf::Socket::Done)
         throw ClientError("Error in get_id()", "ClientError");
     packet >> id;
+    game.me = id;
+    cb(game);
     return id;
 }
 
@@ -99,6 +101,7 @@ void Client::init()
         if (this->_socket.receive(packet) != sf::Socket::Done)
             throw ClientError("Error during init", "ClientError");
         packet >> playerReg;
+        packet.clear();
         if (playerReg.stop == true) {
             for (uint i = 0; i < game.players.size(); i++)
             {
