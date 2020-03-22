@@ -38,10 +38,6 @@ export LDFLAGS			=	-o	$(PROJECT_PATH)/$(BINARY)							\
 							-L	$(TGTSHARED_PLTLIB)/*$(EXTENSION_LIB)				\
 							$(LIBFLAGS)
 
-export LDFLAGS_DEBUG	=	--trace					\
-							--cref					\
-							--print-map				\
-
 export RM	:=	rm -rf
 
 export BUILDEP	:=	dep.d
