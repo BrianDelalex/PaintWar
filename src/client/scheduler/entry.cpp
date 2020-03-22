@@ -12,14 +12,14 @@ int main(int ac, char **av)
     game_t game;
     game.map = map;
     Player *self = new Player;
-    ///////self->setClient(client);
-    // Client *client = connection("127.0.0.1", 53000, av[1], game);
-    // std::function<void (game_t)> func([&game](game_t _game){game = _game;});
-    // client->setCallback(func);
-    // client->init();
-    // std::thread t(&Client::received, client);
-    // t.detach();
-    // init();
+    Client *client = connection("127.0.0.1", std::stoi(std::string(av[2])), av[1], game);
+    std::function<void (game_t)> func([&game](game_t _game){game = _game;});
+    client->setCallback(func);
+    client->init();
+    
+    std::thread t(&Client::received, client);
+    t.detach();
+    init();
     int key = 0;
     while (key == 0)
     {

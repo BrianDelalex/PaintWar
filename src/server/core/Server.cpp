@@ -93,6 +93,7 @@ void Server::init()
             else
                 c = 'r';
             std::cout << std::string("PLAYER " + std::to_string(players[j].pos.x) + " " + std::to_string(players[j].pos.y) + " " + c) << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             send_all(std::string("PLAYER " + std::to_string(players[j].pos.x) + " " + std::to_string(players[j].pos.y) + " " + c));
     }
     std::this_thread::sleep_for(std::chrono::seconds(1));
