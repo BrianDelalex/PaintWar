@@ -25,7 +25,7 @@ class Menu {
         sf::Mouse mouse;
         std::string _username;
         std::string _ip;
-        unsigned short _port;
+        int _port;
 
     private:
     protected:
@@ -43,6 +43,7 @@ class Connexion{
         sf::String playerInput;
         sf::Text playerText;
         sf::Text text;
+        sf::Text text_username;
         sf::Text text_ip;
         sf::Text text_port;
         sf::Font font;

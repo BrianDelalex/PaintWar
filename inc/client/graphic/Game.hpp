@@ -45,5 +45,4 @@ struct game_s
 
 typedef struct game_s game_t;
 
-
 #endif
