@@ -9,8 +9,8 @@ The purpose of this project is to create a video game. (explain later)
 There is no toolchain for cross-compiling. The project is using your host compiler, libraries and tools.
 
 Dependencies list:
-  * `g++` [dowload](https://ftp.gnu.org/gnu/gcc)
-  * `make` [download](https://ftp.gnu.org/gnu/make)
+  * `g++`  (dev under 9.2.1) [download](https://ftp.gnu.org/gnu/gcc)
+  * `make` (dev under 4.3)   [download](https://ftp.gnu.org/gnu/make)
   * `sfml` [clone](https://github.com/SFML/SFML)
 
 ## BUILD
@@ -27,7 +27,8 @@ You must at least run the server and configure it.
 
 `./PaintWar-server.bin $PORT`
 
-Where $PORT is the port which will be open for communication. (Defaulting to *53000* if empty).
+Where arguments:
+  * $PORT: is the port which will be open for our server. (Defaulting to *53000* if empty).
 
 Then run where you want some client and configure also the networking.
 
@@ -42,4 +43,8 @@ Where arguments:
 
 ## EPILOGUE
 
-The project has been built/minded/designed in 48H and with 5 collaborators.
+The project has been minded/designed/built in 48H and with 5 collaborators.
+
+No follow up, without ambition, just fun.
+
+Feel free to fork, use, improve.
