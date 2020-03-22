@@ -38,8 +38,8 @@ Direction Player::getDir() const
 
 void Player::shoot()
 {
-    _gun->fire(_dir);
-    //send ("FIRE _dir")
+    std::string data("FIRE " + std::to_string(_dir));    
+    _client->send(data);
 }
 
 vec_s Player::getPosition() const
@@ -62,21 +62,26 @@ void Player::move(Direction d)
     switch (d)
     {
     case Direction::DOWN:
-        _pos.y++;
+        if (_pos.y + 1 <= 80)
+            _pos.y++;
         break;
     case Direction::LEFT:
-        _pos.x--;
+        if (_pos.x - 1 >= 0)
+            _pos.x--;
         break;
     case Direction::RIGHT:
-        _pos.x++;
+        if (_pos.x + 1 <= 45)
+            _pos.x++;
         break;
     case Direction::UP:
-        _pos.y--;
+        if (_pos.y - 1 >= 0)
+            _pos.y--;
         break;
     default:
         break;
     }
-    std::string data = "MOVE " + std::to_string(_pos.x) + std::to_string(_pos.y);
+    _dir = d;
+    std::string data ("MOVE " + std::to_string(_pos.x) + std::to_string(_pos.y));
     std::cout << data << std::endl;
     _client->send(data);
 }

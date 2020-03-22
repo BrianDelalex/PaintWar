@@ -6,6 +6,8 @@
 #include "client/graphic/graphic.hpp"
 #include "client/scheduler/scheduler.hpp"
 
+extern sf::RenderWindow *wd;
+
 int main(int ac, char **av)
 {
     std::vector<std::string> map = load_map();
@@ -16,12 +18,13 @@ int main(int ac, char **av)
     std::function<void (game_t)> func([&game](game_t _game){game = _game;});
     client->setCallback(func);
     client->init();
+    self->setClient(client);
     
     std::thread t(&Client::received, client);
     t.detach();
     init();
     int key = 0;
-    while (key == 0)
+    while (wd->isOpen())
     {
         key = draw_game(game);
         switch (key) {
@@ -35,18 +38,20 @@ int main(int ac, char **av)
             break;
         case sf::Keyboard::Left:
             self->move(Direction::LEFT);
-            std::cout << "LEft" << std::endl;
+            std::cout << "Left" << std::endl;
             break;
         case sf::Keyboard::Right:
             self->move(Direction::RIGHT);
             std::cout << "Right" << std::endl;
             break;
         case sf::Keyboard::Space:
-        std::cout << "Fire" << std::endl;
+            self->shoot();
+            std::cout << "Fire" << std::endl;
         default:
             break;
         }
     }
+    wd->close();
     // Client client;
     // std::string str;
     // game_t game;
