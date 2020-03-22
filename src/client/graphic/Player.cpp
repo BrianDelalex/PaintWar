@@ -31,6 +31,11 @@ std::string Player::getName() const
     return _name;
 }
 
+Direction Player::getDir() const
+{
+    return _dir;
+}
+
 void Player::shoot()
 {
     _gun->fire(_dir);
@@ -45,6 +50,11 @@ vec_s Player::getPosition() const
 void Player::setPosition(vec_s pos)
 {
     _pos = pos;
+}
+
+void Player::setClient(Client *client)
+{
+    _client = client;
 }
 
 void Player::move(Direction d)
@@ -66,6 +76,9 @@ void Player::move(Direction d)
     default:
         break;
     }
+    std::string data = "MOVE " + std::to_string(_pos.x) + std::to_string(_pos.y);
+    std::cout << data << std::endl;
+    _client->send(data);
 }
 
 std::string Player::getColor() const

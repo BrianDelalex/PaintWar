@@ -45,23 +45,7 @@ int connexion_page(void)
         {
             if (event.type == sf::Event::KeyPressed)
             {
-                std::cout << event.key.code << std::endl;
-                if (event.key.code == sf::Keyboard::Up)
-                {
-                    std::cout << "UP" << std::endl;
-                }
-                if (event.key.code == sf::Keyboard::Down)
-                {
-                    std::cout << "DOWN" << std::endl;
-                }
-                if (event.key.code == sf::Keyboard::Left)
-                {
-                    std::cout << "LEFT" << std::endl;
-                }
-                if (event.key.code == sf::Keyboard::Right)
-                {
-                    std::cout << "RIGHT" << std::endl;
-                }
+                
 
                 // if (event.text.unicode < 128) {
                 // connect.playerInput +=event.text.unicode;

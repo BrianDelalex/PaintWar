@@ -1,7 +1,28 @@
 #ifndef _GAME_
 #define _GAME_
 
-#include "Player.hpp"
+#include <string>
+#include <vector>
+
+enum Direction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    };
+
+enum Team
+{
+    BLUE,
+    RED
+};
+
+struct vec_s
+{
+    int x;
+    int y;
+};
 
 typedef struct player_s
 {

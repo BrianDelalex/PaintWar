@@ -2,17 +2,9 @@
 #define _PLAYER_
 
 #include "Gun.hpp"
-enum Team
-{
-    BLUE,
-    RED
-};
+#include "client/network/Client.hpp"
 
-typedef struct vec_s
-{
-    int x;
-    int y;
-};
+
 
 class Player
 {
@@ -27,8 +19,11 @@ public:
     std::string getColor() const;
     void shoot();
     void reload();
+    Direction getDir() const;
+    void setClient(Client *client);
 
 private:
+    Client *_client;
     std::string _name;
     std::string _color;
     vec_s _pos;

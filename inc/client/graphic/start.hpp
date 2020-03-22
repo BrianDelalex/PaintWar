@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include "Game.hpp"
+#include "Player.hpp"
 
 class Menu {
     public:
