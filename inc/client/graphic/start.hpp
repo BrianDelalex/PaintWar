@@ -69,9 +69,11 @@ class Options {
     protected:
 };
 
-int start(char **);
+int start(void);
 int connexion_page(void);
 int options(void);
 int error_management(int, char **);
+int init_text(Options opt, sf::RenderWindow *window);
+int init_button_back(Options opt, sf::RenderWindow *window);
 
 #endif /* !START_HPP_ */
