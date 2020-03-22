@@ -11,6 +11,7 @@
 #include <SFML/Network.hpp>
 #include "client/network/ClientError.hpp"
 #include "client/graphic/Game.hpp"
+#include "server/data_struct.hpp"
 #include <functional>
 
 
