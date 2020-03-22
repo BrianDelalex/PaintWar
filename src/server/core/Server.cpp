@@ -7,6 +7,26 @@
 
 #include "server/Server.hpp"
 
+sf::Packet& operator<<(sf::Packet& packet, const playerRegister& m)
+{
+    return packet << m.x << m.y << m.c << m.stop;
+}
+
+sf::Packet& operator>>(sf::Packet& packet, playerRegister& m)
+{
+    return packet >> m.x >> m.y >> m.c >> m.stop;
+}
+
+sf::Packet& operator<<(sf::Packet &packet, const Movement&m)
+{
+    return packet << m.type << m.x << m.y << m.id;
+}
+
+sf::Packet& operator>>(sf::Packet &packet, Movement &m)
+{
+    return packet >> m.type >> m.x >> m.y >> m.id;
+}
+
 Server::Server()
 {
 }
@@ -73,31 +93,40 @@ void Server::init()
     {
         if (j % 2 == 0) 
         {
-            players[j].team = BLUE;
+            players[j].team = Team::BLUE;
             players[j].pos.y = 22 + j;
             players[j].pos.x = 1;
         }
         else
         {
-            players[j].team = RED;
+            players[j].team = Team::RED;
             players[j].pos.y = 22 + j;
             players[j].pos.x = 79;
         }
-
     }
+    playerRegister newplayer;
+    sf::Packet packet;
     for (uint j = 0; j < players.size(); j++)
     {
             char c;
             if (players[j].team == BLUE)
-                c = 'b';
+                newplayer.c = 'b';
             else
-                c = 'r';
-            std::cout << std::string("PLAYER " + std::to_string(players[j].pos.x) + " " + std::to_string(players[j].pos.y) + " " + c) << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            send_all(std::string("PLAYER " + std::to_string(players[j].pos.x) + " " + std::to_string(players[j].pos.y) + " " + c));
+                newplayer.c = 'r';
+            newplayer.x = players[j].pos.x;
+            newplayer.y = players[j].pos.y;
+            newplayer.stop = false;
+            packet << newplayer; 
+            send_all(packet);
+            packet.clear();
     }
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    send_all("INITEND ");
+    newplayer.x = 0;
+    newplayer.y = 0;
+    newplayer.c = 0;
+    newplayer.stop = true;
+    packet << newplayer;
+    send_all(packet);
     std::cout << "INITEND" << std::endl;
     process();
 }
@@ -111,17 +140,17 @@ void Server::process()
         {
             if (selector.isReady((*clients[i])))
             {
-                char msg[100];
-                size_t msgLength;
-                if ((*clients[i]).receive(msg, 100, msgLength) != sf::Socket::Done)
+                sf::Packet packet;
+                Movement movement;
+                if ((*clients[i]).receive(packet) != sf::Socket::Done)
                 {
                     throw ServerError("Error while receiving msg", "ServerError");
                 }
-                if (i < (int) this->players.size())
-                    std::cout << "[" << this->players[i].name << "]: " << msg << std::endl; 
-                else
-                    std::cout << "[CLIENT " << i << "]: " << msg << std::endl; 
-                interpreter(std::string(msg), (uint) i);
+                packet >> movement;
+                movement.id = i;
+                packet.clear();
+                packet << movement;
+                send_all(packet);
             }
         }
         } else
@@ -177,5 +206,12 @@ void Server::send_all(const std::string &msg)
 {
     for (uint i = 0; i < this->clients.size(); i++)
         if ((*clients[i]).send(msg.c_str(), msg.length()) != sf::Socket::Done)
+            throw ServerError("Error send_all", "ServerError");
+}
+
+void Server::send_all(sf::Packet packet)
+{
+    for (uint i = 0; i < this->clients.size(); i++)
+        if ((*clients[i]).send(packet) != sf::Socket::Done)
             throw ServerError("Error send_all", "ServerError");
 }

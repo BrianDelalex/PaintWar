@@ -11,6 +11,7 @@
 #include <SFML/Network.hpp>
 #include "server/ServerError.hpp"
 #include "server/ServerPlayer.hpp"
+#include "server/data_struct.hpp"
 #include <thread>
 
 class Server
@@ -28,6 +29,7 @@ public:
     void send_all(const std::string &msg);
     void new_player(const std::string &name, uint idx);
     void player_move(const std::string &args, uint idx);
+    void send_all(sf::Packet packet);
 private:
     sf::TcpListener listener;
     std::vector<sf::TcpSocket *> clients;

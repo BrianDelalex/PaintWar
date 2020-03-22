@@ -7,6 +7,26 @@
 
 #include "client/network/Client.hpp"
 
+sf::Packet& operator<<(sf::Packet& packet, const playerRegister& m)
+{
+    return packet << m.x << m.y << m.c << m.stop;
+}
+
+sf::Packet& operator>>(sf::Packet& packet, playerRegister& m)
+{
+    return packet >> m.x >> m.y >> m.c >> m.stop;
+}
+
+sf::Packet& operator<<(sf::Packet &packet, const Movement&m)
+{
+    return packet << m.type << m.x << m.y << m.id;
+}
+
+sf::Packet& operator>>(sf::Packet &packet, Movement &m)
+{
+    return packet >> m.type >> m.x >> m.y >> m.id;
+}
+
 Client::Client()
 {
     this->nb_player = 0;
@@ -38,35 +58,37 @@ void Client::received()
 {
     while (_is_connected)
     {
-        char msg[100];
-        std::size_t msgLength;
-        if (this->_socket.receive(msg, 100, msgLength) != sf::Socket::Done)
+        Movement movement;
+        sf::Packet packet;
+        if (this->_socket.receive(packet) != sf::Socket::Done)
         {
             throw ClientError("Unable to receive message", "ClientError");
         }
-        interpreter(msg);
-        //cb(nb_player);
+        packet >> movement;
+        if (movement.type == "MOVE")
+        {
+            game.players[movement.id].pos.x = movement.x;
+            game.players[movement.id].pos.y = movement.y;
+            if (game.players[movement.id].team == BLUE)
+                game.map[movement.y][movement.x] = '2';
+            else
+                game.map[movement.y][movement.x] = '1';
+        }
+        cb(game);
         //std::cout << msg << std::endl;
     }
 }
 
 void Client::init()
 {
-    std::size_t msgLength;
-    std::string cmd;
-    std::string args;
+    sf::Packet packet;
+    playerRegister playerReg;
     while (1)
     {
-        char msgC[100];
-        if (this->_socket.receive(msgC, 100, msgLength) != sf::Socket::Done)
-            throw ClientError("ERROR during init", "Client error");
-        std::string msg(msgC);
-        std::cout << "msg: " << msg << std::endl;
-        cmd = msg.substr(0, msg.find_first_of(" ", 0));
-        args = msg.substr(msg.find_first_of(" ", 0) + 1, msg.length() - msg.find_first_of(" ", 0));
-        std::cout << "cmd: " << cmd << std::endl;
-        std::cout << "args: " << args << std::endl;
-        if (cmd == "INITEND") {
+        if (this->_socket.receive(packet) != sf::Socket::Done)
+            throw ("Error during init", "ClientError");
+        packet >> playerReg;
+        if (playerReg.stop == true) {
             for (uint i = 0; i < game.players.size(); i++)
             {
                 if (game.players[i].team == BLUE)
@@ -75,27 +97,33 @@ void Client::init()
                     game.map[game.players[i].pos.y][game.players[i].pos.x] = '1';
             }
             cb(game);
-            std::cout << "HERE" << std::endl;
             return;
         }
-        if (cmd == "PLAYER")
+        if (playerReg.stop == false)
         {
-            int first_space = args.find_first_of(" ", 0);
-            int last_space = args.find_last_of(" ");
             player_t new_player;
-            std::cout << "x: " << args.substr(0, first_space) << std::endl;
-            std::cout << "y: " << args.substr(first_space + 1, last_space - first_space) << std::endl;
-            int x = std::stoi(args.substr(0, first_space));
-            int y = std::stoi(args.substr(first_space + 1, last_space - first_space));
-            new_player.pos.x = x;
-            new_player.pos.y = y;
-            if (args[args.length() - 1] == 'b')
+            new_player.pos.x = playerReg.x;
+            new_player.pos.y = playerReg.y;
+            if (playerReg.c == 'b')
                 new_player.team = BLUE;
             else
                 new_player.team = RED;
             game.players.push_back(new_player);
         }
     }
+}
+
+void Client::move(uint x, uint y)
+{
+    Movement move;
+    sf::Packet packet;
+    move.type = std::string("MOVE");
+    move.x = x;
+    move.y = y;
+    move.id = -1;
+    packet << move;
+    if (this->_socket.send(packet) != sf::Socket::Done)
+        throw ClientError("Error went sending movement", "ClientError");
 }
 
 void Client::interpreter(const std::string &msg)
