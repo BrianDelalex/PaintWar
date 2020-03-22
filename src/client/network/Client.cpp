@@ -61,11 +61,19 @@ void Client::init()
         if (this->_socket.receive(msgC, 100, msgLength) != sf::Socket::Done)
             throw ClientError("ERROR during init", "Client error");
         std::string msg(msgC);
+        std::cout << "msg: " << msg << std::endl;
         cmd = msg.substr(0, msg.find_first_of(" ", 0));
         args = msg.substr(msg.find_first_of(" ", 0) + 1, msg.length() - msg.find_first_of(" ", 0));
         std::cout << "cmd: " << cmd << std::endl;
         std::cout << "args: " << args << std::endl;
         if (cmd == "INITEND") {
+            for (uint i = 0; i < game.players.size(); i++)
+            {
+                if (game.players[i].team == BLUE)
+                    game.map[game.players[i].pos.y][game.players[i].pos.x] = '2';
+                else
+                    game.map[game.players[i].pos.y][game.players[i].pos.x] = '1';
+            }
             cb(game);
             std::cout << "HERE" << std::endl;
             return;
@@ -75,10 +83,10 @@ void Client::init()
             int first_space = args.find_first_of(" ", 0);
             int last_space = args.find_last_of(" ");
             player_t new_player;
-            std::cout << args.substr(0, first_space) << std::endl;
-            std::cout << args.substr(first_space + 1, args.length() - first_space - last_space) << std::endl;
+            std::cout << "x: " << args.substr(0, first_space) << std::endl;
+            std::cout << "y: " << args.substr(first_space + 1, last_space - first_space) << std::endl;
             int x = std::stoi(args.substr(0, first_space));
-            int y = std::stoi(args.substr(first_space + 1, args.length() - first_space - last_space));
+            int y = std::stoi(args.substr(first_space + 1, last_space - first_space));
             new_player.pos.x = x;
             new_player.pos.y = y;
             if (args[args.length() - 1] == 'b')

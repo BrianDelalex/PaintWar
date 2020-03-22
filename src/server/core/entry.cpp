@@ -17,7 +17,7 @@ int main(int ac, char **av)
 
     try
     {
-        server.start((unsigned short) 53000);
+        server.start((unsigned short) port);
         std::thread t(&Server::connecting_player, &server);
         t.detach();
         std::string str;

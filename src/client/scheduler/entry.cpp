@@ -9,10 +9,11 @@ int main(int ac, char **av)
     std::vector<std::string> map = load_map();
     game_t game;
     game.map = map;
-    Client *client = connection("127.0.0.1", 53000, av[1], game);
+    Client *client = connection("127.0.0.1", std::stoi(std::string(av[2])), av[1], game);
     std::function<void (game_t)> func([&game](game_t _game){game = _game;});
     client->setCallback(func);
     client->init();
+    
     std::thread t(&Client::received, client);
     t.detach();
     init();

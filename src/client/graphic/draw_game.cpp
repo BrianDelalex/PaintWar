@@ -7,6 +7,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "client/graphic/Game.hpp"
+#include <iostream>
 
 #define TILE_SIZE 24
 extern sf::RenderWindow *wd;
@@ -34,11 +35,11 @@ void draw_map(std::vector<std::string> *map)
     {
         for (int j = 0; j < (int) (*map)[i].length(); j++)
         {
-            if ((*map)[i][j] == 0)
+            if ((*map)[i][j] == '0')
                 rect.setFillColor(grey);
-            if ((*map)[i][j] == 1)
+            if ((*map)[i][j] == '1')
                 rect.setFillColor(red);
-            if ((*map)[i][j] == 2)
+            if ((*map)[i][j] == '2')
                 rect.setFillColor(blue);
             rect.setPosition(j * TILE_SIZE , i*TILE_SIZE);
             wd->draw(rect);
@@ -51,15 +52,15 @@ void draw_players(std::vector<player_s> *players)
     sf::Color red = {255, 100, 100, 255};
     sf::Color blue = {100 , 100, 255, 255};
     sf::Vector2f size = {20, 20};
-    sf::RectangleShape rect(size);
+    sf::CircleShape circle(10, 30);
     for (uint i = 0; i < players->size(); i++)
     {
-        rect.setPosition((*players)[i].pos.x * TILE_SIZE + 2, (*players)[i].pos.y * TILE_SIZE + 2);
+        circle.setPosition((*players)[i].pos.x * TILE_SIZE + 2, (*players)[i].pos.y * TILE_SIZE + 2);
         if ((*players)[i].team == BLUE)
-            rect.setFillColor(blue);
+            circle.setFillColor(blue);
         else
-            rect.setFillColor(red);
-        wd->draw(rect);
+            circle.setFillColor(red);
+        wd->draw(circle);
     }
 }
 
