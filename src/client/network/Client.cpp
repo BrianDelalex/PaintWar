@@ -75,8 +75,19 @@ void Client::received()
                 game.map[movement.y][movement.x] = '1';
         }
         cb(game);
+        packet.clear();
         //std::cout << msg << std::endl;
     }
+}
+
+uint Client::get_id()
+{
+    sf::Packet packet;
+    uint id;
+    if (this->_socket.receive(packet) != sf::Socket::Done)
+        throw ClientError("Error in get_id()", "ClientError");
+    packet >> id;
+    return id;
 }
 
 void Client::init()
@@ -86,7 +97,7 @@ void Client::init()
     while (1)
     {
         if (this->_socket.receive(packet) != sf::Socket::Done)
-            throw ("Error during init", "ClientError");
+            throw ClientError("Error during init", "ClientError");
         packet >> playerReg;
         if (playerReg.stop == true) {
             for (uint i = 0; i < game.players.size(); i++)

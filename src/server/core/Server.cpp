@@ -128,7 +128,20 @@ void Server::init()
     packet << newplayer;
     send_all(packet);
     std::cout << "INITEND" << std::endl;
+    send_id();
     process();
+}
+
+void Server::send_id()
+{
+    sf::Packet packet;
+    for (uint i = 0; i < clients.size(); i++)
+    {
+        packet << i;
+        if ( (*this->clients[i]).send(packet) != sf::Socket::Done)
+            throw ServerError("Error in send_id()", "ServerError");
+        packet.clear();
+    }
 }
 
 void Server::process()

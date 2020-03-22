@@ -13,6 +13,7 @@ int main(int ac, char **av)
     std::function<void (game_t)> func([&game](game_t _game){game = _game;});
     client->setCallback(func);
     client->init();
+    std::cout << client->get_id() << std::endl;
     
     std::thread t(&Client::received, client);
     t.detach();
