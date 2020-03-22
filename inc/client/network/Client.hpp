@@ -29,6 +29,7 @@ public:
     void interpreter(const std::string &msg);
     void setCallback(std::function<void(game_t)> cb);
     bool is_connected();
+    void move(uint x, uint y);
 private:
     sf::TcpSocket _socket;
     bool _is_connected;

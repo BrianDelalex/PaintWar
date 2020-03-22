@@ -81,4 +81,4 @@ int draw_game(game_s game)
     if (evt.type == sf::Event::KeyPressed)
         return (evt.key.code);
     return (0);
-}   
+}

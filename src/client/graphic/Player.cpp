@@ -6,16 +6,16 @@ Player::Player()
     _gun = new Gun;
 }
 
-void Player::setName(std::string name)
-{
-    _name = name;
-}
-
-
 Player::~Player()
 {
     if (_gun)
         delete _gun;
+}
+
+
+void Player::setName(std::string name)
+{
+    _name = name;
 }
 
 void Player::reload()
@@ -81,9 +81,7 @@ void Player::move(Direction d)
         break;
     }
     _dir = d;
-    std::string data ("MOVE " + std::to_string(_pos.x) + std::to_string(_pos.y));
-    std::cout << data << std::endl;
-    _client->send(data);
+    _client->move(_pos.x, _pos.y);
 }
 
 std::string Player::getColor() const
