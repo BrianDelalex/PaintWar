@@ -2,7 +2,7 @@
 
 PaintWar is A Epitech JAM project.
 
-The purpose of this project is to create a video game. (explain later)
+The purpose of this project is to create a video game.
 
 ## INSTALL
 
