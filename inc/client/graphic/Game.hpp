@@ -4,14 +4,6 @@
 #include <string>
 #include <vector>
 
-enum Direction
-    {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
-    };
-
 enum Team
 {
     BLUE,
@@ -45,7 +37,6 @@ typedef struct game_s
     std::vector<std::string> map;
     std::vector<str_s> texts;
 } game_t;
-
 
 
 #endif
