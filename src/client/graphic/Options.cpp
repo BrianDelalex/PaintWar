@@ -19,36 +19,6 @@ Options::~Options()
 {
 }
 
-int init_text(Options opt, sf::RenderWindow *window)
-{
-    if (!opt.font.loadFromFile("src/client/graphic/picture/JUICE.TTF")) {
-        printf("stylesheet not found!!!");
-        return (84);
-    }
-    opt.font.loadFromFile("src/client/graphic/picture/JUICE.TTF");
-    opt.options.setFont(opt.font);
-    opt.options.setPosition(30,50);
-    opt.options.setCharacterSize(150);
-    opt.options.setString("OPTIONS");
-    window->draw(opt.options);
-    return (0);
-}
-
-int init_button_back(Options opt, sf::RenderWindow *window)
-{
-    if (!opt.font.loadFromFile("src/client/graphic/picture/JUICE.TTF")) {
-        printf("stylesheet not found!!!");
-        return (84);
-    }
-    opt.font.loadFromFile("src/client/graphic/picture/JUICE.TTF");
-    opt.back.setFont(opt.font);
-    opt.back.setPosition(30, 850);
-    opt.back.setCharacterSize(150);
-    opt.back.setString("BACK");
-    window->draw(opt.back);
-    return (0);
-}
-
 int options(void)
 {
     Menu menu;
@@ -74,6 +44,10 @@ int options(void)
     window.draw(opt.sprite);
     init_text(opt, &window);
     init_button_back(opt, &window);
+    init_vol_50(opt, &window);
+    init_vol_75(opt, &window);
+    init_vol_25(opt, &window);
+    init_vol_100(opt, &window);
     window.display();
     }
     return (0);
