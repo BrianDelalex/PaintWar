@@ -2,15 +2,15 @@
 
 PaintWar is A Epitech JAM project.
 
-The purpose of this project is to create a video game. (explain)
+The purpose of this project is to create a video game. (explain later)
 
 ## INSTALL
 
 There is no toolchain for cross-compiling. The project is using your host compiler, libraries and tools.
 
-Dep list:
-  * `g++` [dowload](https://ftp.gnu.org/gnu/gcc)
-  * `make` [download](https://ftp.gnu.org/gnu/make/)
+Dependencies list:
+  * `g++`  (dev under 9.2.1) [download](https://ftp.gnu.org/gnu/gcc)
+  * `make` (dev under 4.3)   [download](https://ftp.gnu.org/gnu/make)
   * `sfml` [clone](https://github.com/SFML/SFML)
 
 ## BUILD
@@ -23,10 +23,28 @@ There is 2 parts: the server & the client.
 
 ## RUN
 
-You must at least run the server and configure it. Then run where you want some client and configure also the networking.
+You must at least run the server and configure it. 
 
-(A runtime description will be provide here)
+`./PaintWar-server.bin $PORT`
+
+Where arguments:
+  * $PORT: is the port which will be open for our server. (Defaulting to *53000* if empty).
+
+Then run where you want some client and configure also the networking.
+
+`./PaintWar-client.bin $USERNAME $SERVER-IP $PORT`
+
+Where arguments:
+  * $USERNAME:  is the username that you want to have.
+  * $SERVER-IP: is the host target IP.
+  * $PORT:      is the host target port allocated for the server.
+
+Use arrows for move and space bar to fire (bullets are invisible).
 
 ## EPILOGUE
 
-The project has been built/minded/designed in 48H and with 5 collaborators.
+The project has been minded/designed/built in 48H and with 5 collaborators.
+
+No follow up, without ambition, just fun.
+
+Feel free to fork, use, improve.
