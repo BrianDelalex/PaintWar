@@ -225,7 +225,9 @@ void Server::send_all(const std::string &msg)
 
 void Server::send_all(sf::Packet packet)
 {
-    for (uint i = 0; i < this->clients.size(); i++)
-        if ((*clients[i]).send(packet) != sf::Socket::Done)
+    for (uint i = 0; i < this->clients.size(); i++) {
+        sf::Packet p(packet);
+        if ((*clients[i]).send(p) != sf::Socket::Done)
             throw ServerError("Error send_all", "ServerError");
+    }
 }
