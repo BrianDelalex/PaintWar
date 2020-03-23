@@ -72,6 +72,7 @@ void Player::move(Direction d)
         if (_pos.y + 1 <= 80)
             _pos.y++;
         break;
+Direction whoWin(game_t);
     case Direction::LEFT:
         if (_pos.x - 1 >= 0)
             _pos.x--;

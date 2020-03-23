@@ -10,6 +10,14 @@
 
 #include "iostream"
 
+enum Direction
+{
+    DOWN,
+    LEFT,
+    RIGHT,
+    UP
+};
+
 enum Team
 {
     BLUE,

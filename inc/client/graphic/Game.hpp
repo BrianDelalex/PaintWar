@@ -3,25 +3,13 @@
 
 #include <string>
 #include <vector>
-
-enum Team
-{
-    BLUE,
-    RED
-};
+#include "server/ServerPlayer.hpp"
 
 struct vec_s
 {
     int x;
     int y;
 };
-
-typedef struct player_s
-{
-    vec_s pos;
-    Team team;
-    Direction direction;
-} player_t;
 
 typedef struct str_s
 {
