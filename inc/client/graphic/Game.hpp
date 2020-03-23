@@ -43,6 +43,8 @@ typedef struct game_s
     std::vector<player_s> players;
     uint me;
     std::vector<std::string> map;
+    int blue;
+    int red;
     std::vector<str_s> texts;
 } game_t;
 

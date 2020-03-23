@@ -77,6 +77,12 @@ void draw_texts(std::vector<str_s> *texts)
 
 }
 
+void draw_score(int blue, int  red)
+{
+    sf::Font f;
+    sf::Text(std::to_string(blue), f, 32);
+}
+
 int draw_game(game_s game)
 {
     wd->clear();

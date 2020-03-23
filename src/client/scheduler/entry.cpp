@@ -13,6 +13,8 @@ int main(int ac, char **av)
     std::vector<std::string> map = load_map();
     game_t *game = new game_t;
     game->map = map;
+    game->blue = 0;
+    game->red = 0;
     Player *self = new Player;
     Client *client = connection(av[2], std::stoi(std::string(av[3])), av[1], *game);
     std::function<void (game_t)> func([&game](game_t _game){*game = _game;});

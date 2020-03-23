@@ -69,10 +69,22 @@ void Client::received()
         {
             game.players[movement.id].pos.x = movement.x;
             game.players[movement.id].pos.y = movement.y;
-            if (game.players[movement.id].team == BLUE)
+            if (game.players[movement.id].team == BLUE) {
+                if (game.map[movement.y][movement.x] = '1') {
+                    game.red -= 1;
+                    game.blue +=1;
+                }
+                if (game.map[movement.y][movement.x] = '0')
+                    game.blue +=1;
                 game.map[movement.y][movement.x] = '2';
-            else
+            } else {
+                if (game.map[movement.y][movement.x] = '2')
+                    game.blue -=1;
+                    game.red += 1;
+                if (game.map[movement.y][movement.x] = '0')
+                    game.red += 1;
                 game.map[movement.y][movement.x] = '1';
+            }
         }
         cb(game);
         packet.clear();
@@ -109,10 +121,13 @@ void Client::init()
         if (playerReg.stop == true) {
             for (uint i = 0; i < game.players.size(); i++)
             {
-                if (game.players[i].team == BLUE)
+                if (game.players[i].team == BLUE) {
                     game.map[game.players[i].pos.y][game.players[i].pos.x] = '2';
-                else
+                    game.blue += 1;
+                } else {
                     game.map[game.players[i].pos.y][game.players[i].pos.x] = '1';
+                    game.red + 1;
+                }
             }
             cb(game);
             return;
