@@ -160,6 +160,7 @@ void Server::process()
                     throw ServerError("Error while receiving msg", "ServerError");
                 }
                 packet >> movement;
+                std::cout << "PLAYER " << i << "MOVE to " << movement.x << " " << movement.y << std::endl;
                 movement.id = i;
                 packet.clear();
                 packet << movement;
