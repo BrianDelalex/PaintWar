@@ -79,8 +79,25 @@ void draw_texts(std::vector<str_s> *texts)
 
 void draw_score(int blue, int  red)
 {
+    std::string f_path = PROJECT_PATH;
+    f_path.append("/ressources/FiraCode-Bold.ttf");
     sf::Font f;
-    sf::Text(std::to_string(blue), f, 32);
+    if (!f.loadFromFile(f_path)) {
+        std::cerr << "Error while loading font" << std::endl;
+        return;
+    }
+    sf::Text blue_t(std::to_string(blue), f, 32);
+    blue_t.setFillColor(sf::Color::Blue);
+    blue_t.setPosition(860 - blue_t.getGlobalBounds().width * 2, 5);
+    wd->draw(blue_t);
+    sf::Text txt(":", f, 32);
+    blue_t.setFillColor(sf::Color::Black);
+    txt.setPosition(blue_t.getPosition().x + blue_t.getGlobalBounds().width + 3, 5);
+    wd->draw(txt);
+    sf::Text red_t(std::to_string(red), f, 32);
+    red_t.setOutlineColor(sf::Color::Red);
+    red_t.setPosition(txt.getPosition().x + txt.getGlobalBounds().width + 3, 5);
+    wd->draw(red_t);
 }
 
 int draw_game(game_s game)
