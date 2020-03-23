@@ -29,6 +29,7 @@ int main(int ac, char **av)
     while (wd->isOpen())
     {
         key = draw_game(*game);
+        self->setPosition(game->players[game->me].pos);
         switch (key) {
         case sf::Keyboard::Up:
             self->move(Direction::UP);
