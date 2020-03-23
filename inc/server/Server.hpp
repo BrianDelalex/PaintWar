@@ -31,7 +31,7 @@ public:
     void new_player(const std::string &name, uint idx);
     void player_move(const std::string &args, uint idx);
     void send_all(sf::Packet packet);
-    void handle_shoot(Movement shot, int i);
+    void handle_shoot(Movement shot, uint idx);
     void player_get_shot(int i);
 private:
     sf::TcpListener listener;
@@ -43,5 +43,10 @@ private:
     bool connectingPlayer;
     bool serverOn;
 };
+
+sf::Packet& operator<<(sf::Packet &packet, const Movement&m);
+sf::Packet& operator>>(sf::Packet &packet, Movement &m);
+sf::Packet& operator>>(sf::Packet& packet, playerRegister& m);
+sf::Packet& operator<<(sf::Packet& packet, const playerRegister& m);
 
 #endif

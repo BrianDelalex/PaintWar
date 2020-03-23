@@ -112,7 +112,6 @@ void Server::init()
     sf::Packet packet;
     for (uint j = 0; j < players.size(); j++)
     {
-            char c;
             if (players[j].team == BLUE)
                 newplayer.c = 'b';
             else
@@ -212,17 +211,11 @@ void Server::player_get_shot(int i)
     send_all(packet);
 }
 
-void Server::handle_shoot(Movement shot, int idx)
+void Server::handle_shoot(Movement shot, uint idx)
 {
     Direction dir = (Direction) shot.id;
     Movement movement;
     sf::Packet packet;
-
-    int inc = 0;
-    if (dir == UP || dir == LEFT)
-        inc = -1;
-    if (dir == DOWN || dir == RIGHT)
-        inc = 1;
     
     if (dir == UP)
         for (uint i = 0; i < players.size(); i++)
