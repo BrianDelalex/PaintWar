@@ -41,7 +41,7 @@ Where arguments:
 
 ## RUNTIME
 
-There two teams, red and blue.
+There are two teams, red and blue.
 
 The goal of the game is to get the most square marked with your team color (*blue* or *red*).
 
