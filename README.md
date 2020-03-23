@@ -37,9 +37,9 @@ Then run where you want some client and configure also the networking.
 Where arguments:
   * $USERNAME:  is the username that you want to have.
   * $SERVER-IP: is the host target IP.
-  * $PORT:      is the host target port allocated for the server (Defaulting to *53000* if empty).
+  * $PORT:      is the host target port allocated for the server.
 
-(A runtime description will be provide here)
+Use arrows for move and space bar to fire (bullets are invisible).
 
 ## EPILOGUE
 
