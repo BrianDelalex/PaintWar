@@ -48,5 +48,12 @@ typedef struct game_s
     std::vector<str_s> texts;
 } game_t;
 
+void draw_map(std::vector<std::string> *map);
+void draw_players(std::vector<player_s> *players, uint me);
+void draw_texts(std::vector<str_s> *texts);
+int draw_game(game_s game);
+void draw_score(int blue, int red);
+
+void initGame(void);
 
 #endif

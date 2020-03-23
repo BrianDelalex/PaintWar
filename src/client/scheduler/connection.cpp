@@ -8,6 +8,7 @@
 #include "SFML/Network.hpp"
 #include "client/network/Client.hpp"
 #include "client/network/ClientError.hpp"
+#include "client/scheduler/scheduler.hpp"
 
 Client *connection(std::string ip, unsigned short port, std::string name, game_t game)
 {

@@ -14,7 +14,10 @@
 #include "server/data_struct.hpp"
 #include <functional>
 
-
+sf::Packet& operator<<(sf::Packet&, const playerRegister&);
+sf::Packet& operator>>(sf::Packet&, playerRegister&);
+sf::Packet& operator<<(sf::Packet&, const Movement&);
+sf::Packet& operator>>(sf::Packet&, Movement&);
 
 class Client
 {

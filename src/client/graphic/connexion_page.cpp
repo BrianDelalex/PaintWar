@@ -34,8 +34,6 @@ int connexion_page(void)
     connect.playerText.setPosition(60, 300);
     connect.text.setFont(connect.font);
     connect.text.setString("C'est parti pour la plus grand de toutes les batailles!!");
-    game_t *k = new game_t;
-    Player *self = new Player;
     while (window.isOpen())
     {
         sf::Event event;

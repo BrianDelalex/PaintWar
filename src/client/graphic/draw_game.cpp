@@ -8,9 +8,12 @@
 #include "SFML/Graphics.hpp"
 #include "client/graphic/Game.hpp"
 #include <iostream>
+#include "def/keyword.h"
 
 #define TILE_SIZE 24
 extern sf::RenderWindow *wd;
+
+sf::RectangleShape load_tile(void);
 
 sf::RectangleShape load_tile()
 {
@@ -52,7 +55,6 @@ void draw_players(std::vector<player_s> *players, uint me)
     sf::Color red = {255, 100, 100, 255};
     sf::Color blue = {100 , 100, 255, 255};
     sf::Color yellow = {255, 255, 0, 255};
-    sf::Vector2f size = {20, 20};
     sf::CircleShape circle(10, 30);
     circle.setOutlineThickness(1.5);
     for (uint i = 0; i < players->size(); i++)
@@ -72,7 +74,7 @@ void draw_players(std::vector<player_s> *players, uint me)
     }
 }
 
-void draw_texts(std::vector<str_s> *texts)
+void draw_texts(std::vector<str_s> *texts __unused)
 {
 
 }

@@ -13,7 +13,7 @@
 #include "client/graphic/Game.hpp"
 
 std::vector<std::string> load_map();
-void init();
-int draw_game(game_s game);
+void init(void);
+int draw_game(game_s);
 
 #endif

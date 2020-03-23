@@ -34,14 +34,14 @@ Client::Client()
 
 Client::~Client() {}
 
-void Client::connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name, game_t game)
+void Client::connect(const sf::IpAddress &adresse, unsigned short port, const std::string &name, game_t gam)
 {
     if (this->_socket.connect(adresse, port) != sf::Socket::Done)
     {
         throw ClientError(std::string("Unable to connect to" + adresse.toString()), "ClientError");
     }
     this->_is_connected = true;
-    this->game = game;
+    this->game = gam;
     if (this->_socket.send(std::string("NAME " + name).c_str(), 100) != sf::Socket::Done)
         throw ClientError("Error While sending name", "ClientError");
 }
@@ -128,7 +128,7 @@ void Client::init()
                     game.blue += 1;
                 } else {
                     game.map[game.players[i].pos.y][game.players[i].pos.x] = '1';
-                    game.red + 1;
+                    game.red += 1;
                 }
             }
             cb(game);
