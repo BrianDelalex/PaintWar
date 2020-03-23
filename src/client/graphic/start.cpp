@@ -59,7 +59,7 @@ int start(void)
                     window.close();
                 }
                 if ((localPosition.y <= 720 && localPosition.y >= 644) && (localPosition.x <= 1145 && localPosition.x >= 818)) {
-                    // printf("play\n");
+                    window.close();
                     return (0);
                 }
                 if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801)) {
