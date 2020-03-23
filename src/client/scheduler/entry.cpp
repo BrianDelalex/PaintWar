@@ -10,6 +10,8 @@ extern sf::RenderWindow *wd;
 
 int main(int ac, char **av)
 {
+    if (error_management(ac, av) == 1)
+        return (0);
     std::vector<std::string> map = load_map();
     game_t *game = new game_t;
     game->map = map;

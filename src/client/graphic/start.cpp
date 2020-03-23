@@ -36,7 +36,7 @@ int error_management(int a, char **v)
         menu._username = v[1];
         menu._ip = v[2];
         menu._port = std::stoi(v[3]);
-        start();
+        return (start());
     }
     return (0);
 }
@@ -58,23 +58,11 @@ int start(void)
                     options();
                     window.close();
                 }
-<<<<<<< HEAD
-                    // OPTIONS music extc
-                if ((localPosition.y <= 796 && localPosition.y >= 657) && (localPosition.x <= 1145 && localPosition.x >= 730)) {
-                    printf("play\n");
-                    window.close();
-                    connexion_page();
-                }
-                    // PLAY jeu vidéo affichage map
-                if ((localPosition.y <= 796 && localPosition.y >= 657) && (localPosition.x <= 1708 && localPosition.x >= 1300)) {
-                    printf("EXIT\n");
-=======
                 if ((localPosition.y <= 720 && localPosition.y >= 644) && (localPosition.x <= 1145 && localPosition.x >= 818)) {
                     window.close();
                     return (0);
                 }
                 if ((localPosition.y <= 1299 && localPosition.y >= 643) && (localPosition.x <= 1708 && localPosition.x >= 801)) {
->>>>>>> bpierre
                     window.close();
                     return (1);
                 }
