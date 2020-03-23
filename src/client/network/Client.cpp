@@ -70,19 +70,20 @@ void Client::received()
             game.players[movement.id].pos.x = movement.x;
             game.players[movement.id].pos.y = movement.y;
             if (game.players[movement.id].team == BLUE) {
-                if (game.map[movement.y][movement.x] = '1') {
-                    game.red -= 1;
-                    game.blue +=1;
+                if (game.map[movement.y][movement.x] == '1') {
+                    game.red = game.red - 1;
+                    game.blue = game.blue + 1;
                 }
-                if (game.map[movement.y][movement.x] = '0')
-                    game.blue +=1;
+                if (game.map[movement.y][movement.x] == '0')
+                    game.blue = game.blue + 1;
                 game.map[movement.y][movement.x] = '2';
             } else {
-                if (game.map[movement.y][movement.x] = '2')
-                    game.blue -=1;
-                    game.red += 1;
-                if (game.map[movement.y][movement.x] = '0')
-                    game.red += 1;
+                if (game.map[movement.y][movement.x] == '2') {
+                    game.blue = game.blue - 1;
+                    game.red = game.red + 1;
+                }
+                if (game.map[movement.y][movement.x] == '0')
+                    game.red = game.red + 1;
                 game.map[movement.y][movement.x] = '1';
             }
         }
@@ -113,6 +114,7 @@ void Client::init()
 {
     sf::Packet packet;
     playerRegister playerReg;
+    this->_socket.setBlocking(true);
     while (1)
     {
         if (this->_socket.receive(packet) != sf::Socket::Done)

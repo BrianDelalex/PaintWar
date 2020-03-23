@@ -79,6 +79,8 @@ void draw_texts(std::vector<str_s> *texts)
 
 void draw_score(int blue, int  red)
 {
+    sf::Color cred = {255, 100, 100, 255};
+    sf::Color cblue = {100 , 100, 255, 255};
     std::string f_path = PROJECT_PATH;
     f_path.append("/ressources/FiraCode-Bold.ttf");
     sf::Font f;
@@ -87,16 +89,16 @@ void draw_score(int blue, int  red)
         return;
     }
     sf::Text blue_t(std::to_string(blue), f, 32);
-    blue_t.setFillColor(sf::Color::Blue);
-    blue_t.setPosition(860 - blue_t.getGlobalBounds().width * 2, 5);
+    blue_t.setFillColor(cblue);
+    blue_t.setPosition(860 - blue_t.getGlobalBounds().width, 5);
     wd->draw(blue_t);
     sf::Text txt(":", f, 32);
     blue_t.setFillColor(sf::Color::Black);
     txt.setPosition(blue_t.getPosition().x + blue_t.getGlobalBounds().width + 3, 5);
     wd->draw(txt);
     sf::Text red_t(std::to_string(red), f, 32);
-    red_t.setOutlineColor(sf::Color::Red);
-    red_t.setPosition(txt.getPosition().x + txt.getGlobalBounds().width + 3, 5);
+    red_t.setFillColor(cred);
+    red_t.setPosition(txt.getPosition().x + txt.getGlobalBounds().width + 10, 5);
     wd->draw(red_t);
 }
 
@@ -106,6 +108,7 @@ int draw_game(game_s game)
     draw_map(&game.map);
     draw_players(&game.players, game.me);
     draw_texts(&game.texts);
+    draw_score(game.blue, game.red);
     wd->display();
     sf::Event evt;
     wd->pollEvent(evt);

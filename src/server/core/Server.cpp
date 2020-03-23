@@ -117,7 +117,15 @@ void Server::init()
             newplayer.y = players[j].pos.y;
             newplayer.stop = false;
             packet << newplayer; 
-            send_all(packet);
+            sf::Socket::Status status;
+            for (uint i = 0; i < this->clients.size(); i++) {
+                status =(*clients[i]).send(packet);
+                if (status == sf::Socket::Partial)
+                    status = (*clients[i]).send(packet);
+                if (status != sf::Socket::Done) 
+                    throw ServerError("Error send_all", "ServerError");
+                std::cout << "Sending to client " << i << " player " << j << std::endl;
+            }
             packet.clear();
     }
     std::this_thread::sleep_for(std::chrono::seconds(1));
