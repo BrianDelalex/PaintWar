@@ -69,7 +69,7 @@ void Player::move(Direction d)
     switch (d)
     {
     case Direction::DOWN:
-        if (_pos.y + 1 <= 80)
+        if (_pos.y + 1 < 43)
             _pos.y++;
         break;
     case Direction::LEFT:
@@ -77,7 +77,7 @@ void Player::move(Direction d)
             _pos.x--;
         break;
     case Direction::RIGHT:
-        if (_pos.x + 1 <= 45)
+        if (_pos.x + 1 < 80)
             _pos.x++;
         break;
     case Direction::UP:

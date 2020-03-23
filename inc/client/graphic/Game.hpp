@@ -16,6 +16,14 @@ struct vec_s
     int y;
 };
 
+enum Direction
+{
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT
+};
+
 typedef struct player_s
 {
     vec_s pos;

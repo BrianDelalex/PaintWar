@@ -89,6 +89,11 @@ uint Client::get_id()
     packet >> id;
     game.me = id;
     cb(game);
+    for (uint i = 0; i < game.players.size(); i++)
+    {
+        std::cout << "[" << i << "]" << " x: " << game.players[i].pos.x << " y: " << game.players[i].pos.y << std::endl;
+    }
+    std::cout << "MY ID: " << id << std::endl;
     return id;
 }
 
