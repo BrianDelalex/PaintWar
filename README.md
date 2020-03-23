@@ -28,16 +28,24 @@ You must at least run the server and configure it.
 `./PaintWar-server.bin $PORT`
 
 Where arguments:
-  * $PORT: is the port which will be open for our server. (Defaulting to *53000* if empty).
+  * `$PORT`: is the port which will be open for our server. (Defaulting to *53000* if empty).
 
 Then run where you want some client and configure also the networking.
 
 `./PaintWar-client.bin $USERNAME $SERVER-IP $PORT`
 
 Where arguments:
-  * $USERNAME:  is the username that you want to have.
-  * $SERVER-IP: is the host target IP.
-  * $PORT:      is the host target port allocated for the server.
+  * `$USERNAME`:  is the username that you want to have.
+  * `$SERVER-IP`: is the host target IP.
+  * `$PORT`:      is the host target port allocated for the server.
+
+## RUNTIME
+
+There two teams, red and blue.
+
+The goal of the game is to get the most square marked with your team color (*blue* or *red*).
+
+You mark a square when run on it.
 
 Use arrows for move and space bar to fire (bullets are invisible).
 
