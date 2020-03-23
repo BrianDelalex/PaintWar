@@ -42,6 +42,10 @@ void Server::start(unsigned short port)
     this->selector.add(listener);
     this->connectingPlayer = true;
     this->serverOn = false;
+    this->spawn_blue.x = 1;
+    this->spawn_blue.y = 22;
+    this->spawn_red.x = 79;
+    this->spawn_red.y = 22;
 }
 
 void Server::connecting_player()
@@ -168,11 +172,17 @@ void Server::process()
                     throw ServerError("Error while receiving msg", "ServerError");
                 }
                 packet >> movement;
-                std::cout << "PLAYER " << i << "MOVE to " << movement.x << " " << movement.y << std::endl;
-                movement.id = i;
-                packet.clear();
-                packet << movement;
-                send_all(packet);
+                if (movement.type == "MOVE") {
+                    std::cout << "PLAYER " << i << "MOVE to " << movement.x << " " << movement.y << std::endl;
+                    movement.id = i;
+                    players[i].pos.x = movement.x;
+                    players[i].pos.y = movement.y;
+                    packet.clear();
+                    packet << movement;
+                    send_all(packet);
+                } else if (movement.type == "FIRE") {
+                    handle_shoot(movement, i);
+                }
             }
         }
         } else
@@ -180,6 +190,56 @@ void Server::process()
             std::cout << "[SERVER]: Nothing appends in the last 10 secondes" << std::endl;
         }
     
+}
+
+void Server::player_get_shot(int i)
+{
+    Movement movement;
+    sf::Packet packet;
+    std::cout << "PLAYER " << players[i].name << " GET SHOT\n";
+    if (players[i].team == Team::BLUE) {
+        players[i].pos = spawn_blue;
+        movement.x = spawn_blue.x;
+        movement.y = spawn_blue.y;
+    } else {
+        players[i].pos = spawn_red;
+        movement.x = spawn_red.x;
+        movement.y = spawn_red.y;
+    }
+    movement.type = "MOVE";
+    movement.id = i;
+    packet << movement;
+    send_all(packet);
+}
+
+void Server::handle_shoot(Movement shot, int idx)
+{
+    Direction dir = (Direction) shot.id;
+    Movement movement;
+    sf::Packet packet;
+
+    int inc = 0;
+    if (dir == UP || dir == LEFT)
+        inc = -1;
+    if (dir == DOWN || dir == RIGHT)
+        inc = 1;
+    
+    if (dir == UP)
+        for (uint i = 0; i < players.size(); i++)
+            if (i != idx && players[i].pos.x == players[idx].pos.x && players[idx].pos.y > players[i].pos.y && players[idx].team != players[i].team)
+               player_get_shot(i);
+    if (dir == DOWN)
+        for (uint i = 0; i < players.size(); i++)
+            if (i != idx && players[i].pos.x == players[idx].pos.x && players[idx].pos.y < players[i].pos.y && players[idx].team != players[i].team)
+                player_get_shot(i);
+    if (dir == RIGHT)
+        for (uint i = 0; i < players.size(); i++)
+            if (i != idx && players[i].pos.y == players[idx].pos.y && players[idx].pos.x < players[i].pos.x && players[idx].team != players[i].team)
+                player_get_shot(i);
+    if (dir == LEFT)
+        for (uint i = 0; i < players.size(); i++)
+            if (i != idx && players[i].pos.y == players[idx].pos.y && players[idx].pos.x > players[i].pos.x && players[idx].team != players[i].team)
+                player_get_shot(i);
 }
 
 void Server::new_player(const std::string &name, uint idx)

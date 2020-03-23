@@ -196,3 +196,17 @@ std::string Client::wait_start()
         throw ClientError("Error while waiting game start", "ClientError");
     return (msg);
 }
+
+void Client::shoot(Direction dir)
+{
+    sf::Packet packet;
+    Movement move;
+    move.type = "FIRE";
+    move.id = (int) dir;
+    packet << move;
+    sf::Socket::Status status = this->_socket.send(packet);
+    if (status == sf::Socket::Partial)
+        status = this->_socket.send(packet);
+    if (status != sf::Socket::Done)
+        throw ClientError("Error when sending shot", "ClientError");
+}

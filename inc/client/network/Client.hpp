@@ -31,6 +31,7 @@ public:
     void setCallback(std::function<void(game_t)> cb);
     bool is_connected();
     void move(uint x, uint y);
+    void shoot(Direction dir);
 private:
     sf::TcpSocket _socket;
     bool _is_connected;

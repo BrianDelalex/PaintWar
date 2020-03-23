@@ -45,8 +45,7 @@ Direction Player::getDir() const
 
 void Player::shoot()
 {
-    std::string data("FIRE " + std::to_string(_dir));    
-    _client->send(data);
+    _client->shoot(_dir);
 }
 
 vec_s Player::getPosition() const

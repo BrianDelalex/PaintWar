@@ -31,8 +31,12 @@ public:
     void new_player(const std::string &name, uint idx);
     void player_move(const std::string &args, uint idx);
     void send_all(sf::Packet packet);
+    void handle_shoot(Movement shot, int i);
+    void player_get_shot(int i);
 private:
     sf::TcpListener listener;
+    Vec spawn_blue;
+    Vec spawn_red;
     std::vector<sf::TcpSocket *> clients;
     std::vector<Ply> players;
     sf::SocketSelector selector;
