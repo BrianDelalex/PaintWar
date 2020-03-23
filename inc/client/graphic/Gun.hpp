@@ -1,16 +1,7 @@
 #ifndef _GUN_
 #define _GUN_
 
-#include <string>
-#include <vector>
-
-enum Direction
-    {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
-    };
+#include "Game.hpp"
 
 class Gun
 {

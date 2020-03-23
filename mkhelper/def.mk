@@ -70,7 +70,8 @@ CXXFLAGS += $(LIBFLAGS)
 
 
 # Compile-time Macro
-CXXFLAGS	+=	'-D PROJECT="$(PROJECT)"'			\
+CXXFLAGS	+=	'-D PROJECT="$(PROJECT)"'				\
+				'-D PROJECT_PATH="$(PROJECT_PATH)"'		\
 
 # Debug mode
 export 	CFLAGSDEBUG	= 	-D DEBUG \

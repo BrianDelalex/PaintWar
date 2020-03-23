@@ -1,8 +1,7 @@
 #include "client/graphic/Player.hpp"
 
 
-Player::Player(std::string color) : _color(color),
-                                    _dir(color == "blue" ? Direction::LEFT : Direction::RIGHT)
+Player::Player()
 {
     _gun = new Gun;
 }
@@ -13,6 +12,18 @@ Player::~Player()
         delete _gun;
 }
 
+void Player::assign(uint id, std::vector<player_s> arr)
+{
+    player_s self = arr.at(id);
+    _dir = self.team == Team::BLUE ? Direction::RIGHT : Direction::LEFT;
+    _pos.x = self.pos.x;
+    _pos.y = self.pos.y;
+}
+
+void Player::setName(std::string name)
+{
+    _name = name;
+}
 
 void Player::reload()
 {
@@ -22,14 +33,34 @@ void Player::reload()
         _gun->setAmmo(_gun->getAmmo() + 5);
 }
 
-void Player::shoot()
+std::string Player::getName() const
 {
-    _gun->fire(_dir);
+    return _name;
 }
 
-std::vector<int> Player::getPosition() const
+Direction Player::getDir() const
 {
-    return std::vector<int>(_x, _y);
+    return _dir;
+}
+
+void Player::shoot()
+{
+    _client->shoot(_dir);
+}
+
+vec_s Player::getPosition() const
+{
+    return _pos;
+}
+
+void Player::setPosition(vec_s pos)
+{
+    _pos = pos;
+}
+
+void Player::setClient(Client *client)
+{
+    _client = client;
 }
 
 void Player::move(Direction d)
@@ -37,20 +68,26 @@ void Player::move(Direction d)
     switch (d)
     {
     case Direction::DOWN:
-        _y++;
+        if (_pos.y + 1 < 43)
+            _pos.y++;
         break;
     case Direction::LEFT:
-        _x--;
+        if (_pos.x - 1 >= 0)
+            _pos.x--;
         break;
     case Direction::RIGHT:
-        _x++;
+        if (_pos.x + 1 < 80)
+            _pos.x++;
         break;
     case Direction::UP:
-        _y--;
+        if (_pos.y - 1 >= 0)
+            _pos.y--;
         break;
     default:
         break;
     }
+    _dir = d;
+    _client->move(_pos.x, _pos.y);
 }
 
 std::string Player::getColor() const

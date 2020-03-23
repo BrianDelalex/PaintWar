@@ -15,6 +15,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Game.hpp"
+#include "Player.hpp"
 
 class Menu {
     public:
@@ -25,13 +27,11 @@ class Menu {
         sf::Mouse mouse;
         std::string _username;
         std::string _ip;
-        unsigned short _port;
+        int _port;
 
     private:
     protected:
 };
-
-int start(int argc, char **argv);
 
 class Connexion{
     public:
@@ -43,6 +43,7 @@ class Connexion{
         sf::String playerInput;
         sf::Text playerText;
         sf::Text text;
+        sf::Text text_username;
         sf::Text text_ip;
         sf::Text text_port;
         sf::Font font;
@@ -52,7 +53,32 @@ class Connexion{
     protected:
 };
 
-int start(int, char **);
-int connexion_page(void);
+class Options {
+    public:
+        Options();
+        ~Options();
+        sf::Sprite sprite;
+        sf::Texture texture;
+        sf::Text options;
+        sf::Text volume;
+        sf::Text back;
+        sf::Text volume_25;
+        sf::Text volume_50;
+        sf::Text volume_75;
+        sf::Text volume_100;
+        sf::Font font;
+    private:
+    protected:
+};
 
+int start(void);
+int connexion_page(void);
+int options(void);
+int error_management(int, char **);
+int init_text(Options opt, sf::RenderWindow *window);
+int init_button_back(Options opt, sf::RenderWindow *window);
+int init_vol_25(Options opt, sf::RenderWindow *window);
+int init_vol_50(Options opt, sf::RenderWindow *window);
+int init_vol_75(Options opt, sf::RenderWindow *window);
+int init_vol_100(Options opt, sf::RenderWindow *window);
 #endif /* !START_HPP_ */

@@ -5,12 +5,12 @@
 ** connexion_page
 */
 
-#include "client/graphic/start.hpp"
+#include "../../../inc/client/graphic/start.hpp"
 
 Connexion::Connexion()
 {
-    sf::IntRect rect (0, 0, 1920, 1080);
-    this->texture.loadFromFile("Assets/connexion.jpg");
+    sf::IntRect rect(0, 0, 1920, 1080);
+    this->texture.loadFromFile("src/client/graphic/picture/connexion.jpg");
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(rect);
 }
@@ -19,42 +19,19 @@ Connexion::~Connexion()
 {
 }
 
-int load_text()
+int connexion_page(void)
 {
-    Connexion connect;
-    printf("%s\n", "putain");
-    if (!connect.font.loadFromFile("Graffiti.ttf")) {
-        printf("pas marché l'écriture");
-        return (84);
-    }
-    connect.font.loadFromFile("Graffiti.ttf");
-    connect.playerText.setFont(connect.font);
-    connect.playerText.setPosition(60,300);
-    connect.text.setFont(connect.font);
-    connect.text.setString("C'est parti pour la plus grand de toutes les batailles de peinture !!");
-    printf("%s\n", "censé avoir");
-    return (0);
-}
-
-// void print_cpu(Connect connect, sf::RenderWindow *window)
-// {
-
-// }
-int Connexion::connexion_page(void)
-{
-    /*Case a tapper port et IP*/
+    Menu menu;
     Connexion connect;
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
-
-    if (!connect.font.loadFromFile("Graffiti.ttf")) {
-        printf("pas marché l'écriture");
+    if (!connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf")) {
+        std::cout << "Not found" << std::endl;
         return (84);
     }
-
-    connect.font.loadFromFile("Graffiti.ttf");
+    connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf");
     connect.playerText.setFont(connect.font);
-    connect.playerText.setPosition(60,300);
+    connect.playerText.setPosition(60, 300);
     connect.text.setFont(connect.font);
     connect.text.setString("C'est parti pour la plus grand de toutes les batailles!!");
     while (window.isOpen())
@@ -62,14 +39,18 @@ int Connexion::connexion_page(void)
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::TextEntered)
+            if (event.type == sf::Event::KeyPressed)
             {
-                if (event.text.unicode < 128) {
-                connect.playerInput +=event.text.unicode;
-                connect.playerText.setString(connect.playerInput);
-                connect._ip += event.text.unicode;
-                printf("%s\n", connect._ip);
-                }
+                
+
+                // if (event.text.unicode < 128) {
+                // connect.playerInput +=event.text.unicode;
+                // connect.playerText.setString(connect.playerInput);
+                // connect._ip += event.text.unicode;
+                // std::cout << connect._ip << std::endl;
+                // std::cout << std::string(connect.playerInput) << std::endl;
+                // std::cout << std::string(connect.playerText.getString()) << std::endl;
+                // }
             }
             if (event.type == sf::Event::Closed)
                 window.close();
@@ -85,6 +66,5 @@ int Connexion::connexion_page(void)
 }
 /*
     TODO-LIST:
-        1- Récupérer et stocker les valeurs du port et ip
-        2- Belle affichage avec input avec case pour écrire pour le port et l'input extc
+        afficher les usernames extc
 */
