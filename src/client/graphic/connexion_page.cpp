@@ -26,9 +26,14 @@ int connexion_page(void)
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Connexion Page");
 
+<<<<<<< HEAD
     if (!connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf"))
     {
         printf("pas marché l'écriture");
+=======
+    if (!connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf")) {
+        std::cout << "Not found" << std::endl;
+>>>>>>> bpierre
         return (84);
     }
     connect.font.loadFromFile("src/client/graphic/picture/Graffiti.ttf");

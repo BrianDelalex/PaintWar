@@ -25,25 +25,29 @@ int options(void)
     Options opt;
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Options Page");
-    if (!opt.font.loadFromFile("src/client/graphic/picture/JUICE.TTF")) {
-        printf("pas marché l'écriture");
-        return (84);
-    }
-    opt.font.loadFromFile("src/client/graphic/picture/JUICE.TTF");
-    opt.options.setFont(opt.font);
-    opt.options.setPosition(60,300);
-    opt.options.setString("OPTIONS");
     while (window.isOpen())
     {
+        sf::Vector2i localPosition = sf::Mouse::getPosition(window);
         sf::Event event;
         while (window.pollEvent(event))
         {
+            if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                if ((localPosition.x >= 5 && localPosition.x <= 915) && (localPosition.y >= 663 && localPosition.y <= 1059)) {
+                    start();
+                    window.close();
+                }
+            }
             if (event.type == sf::Event::Closed)
                 window.close();
         }
     window.clear();
     window.draw(opt.sprite);
-    window.draw(opt.options);
+    init_text(opt, &window);
+    init_button_back(opt, &window);
+    init_vol_50(opt, &window);
+    init_vol_75(opt, &window);
+    init_vol_25(opt, &window);
+    init_vol_100(opt, &window);
     window.display();
     }
     return (0);
